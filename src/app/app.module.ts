@@ -28,9 +28,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
       name: 'NGXS Wintego Store',
       disabled: environment.production
     }),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDEhMCTsKcRrtSy59Nmn4PgCPxE8DTurSY'
-    })
+
   ],
   providers: [],
   bootstrap: [AppComponent]

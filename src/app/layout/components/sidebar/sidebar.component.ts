@@ -12,7 +12,6 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.showMenu = '';
     }
-
     addExpandClass(element: any) {
         if (element === this.showMenu) {
             this.showMenu = '0';

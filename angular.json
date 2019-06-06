@@ -27,7 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less",
+              "src/styles/styles.less",
               "node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css",
               "node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-regular.css",
               "node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-brands.css",
