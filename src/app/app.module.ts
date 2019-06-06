@@ -11,6 +11,7 @@ import { CoreModule } from './core/core.module';
 import { SubjectsState } from './store/subjects';
 import { TasksState } from './store/tasks';
 import { AgmCoreModule } from '@agm/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,13 +22,14 @@ import { AgmCoreModule } from '@agm/core';
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     NgxsModule.forRoot([UsersState, SubjectsState, TasksState]),
     NgxsReduxDevtoolsPluginModule.forRoot({
-      name: 'NGXS Todo Store',
+      name: 'NGXS Wintego Store',
       disabled: environment.production
     }),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'
+      apiKey: 'AIzaSyDEhMCTsKcRrtSy59Nmn4PgCPxE8DTurSY'
     })
   ],
   providers: [],
