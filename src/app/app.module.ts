@@ -4,13 +4,10 @@ import { NgxsModule } from '@ngxs/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { UsersState } from './store/users';
+// import { UsersState } from './store/users';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
-import { SubjectsState } from './store/subjects';
-import { TasksState } from './store/tasks';
-import { AgmCoreModule } from '@agm/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -23,7 +20,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     CoreModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgxsModule.forRoot([UsersState, SubjectsState, TasksState]),
+    NgxsModule.forRoot([]),
     NgxsReduxDevtoolsPluginModule.forRoot({
       name: 'NGXS Wintego Store',
       disabled: environment.production

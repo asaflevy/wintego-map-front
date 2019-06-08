@@ -31,6 +31,7 @@
     "@ngx-translate/http-loader": "^4.0.0",
     "@ngxs/logger-plugin": "^3.3.4",
     "@ngxs/store": "^3.3.4",
+    "@types/googlemaps": "^3.36.4",
     "@w11k/ngx-componentdestroyed": "^4.1.4",
     "core-js": "^2.5.4",
     "include-media": "^1.4.9",

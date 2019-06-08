@@ -1,18 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UserTabComponent } from './user-tab/user-tab.component';
-import { CapitalizePipe } from './capitalize.pipe';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {UserTabComponent} from './user-tab/user-tab.component';
+import {CapitalizePipe} from './capitalize.pipe';
 import {
   MatBadgeModule,
   MatButtonModule, MatCardModule, MatCheckboxModule,
-  MatGridListModule, MatIconModule,
-  MatListModule,
+  MatGridListModule, MatIconModule, MatInputModule,
+  MatListModule, MatRippleModule,
   MatTableModule
 } from '@angular/material';
+import {AgmCoreModule, GoogleMapsAPIWrapper} from "@agm/core";
 
 
 @NgModule({
   declarations: [UserTabComponent, CapitalizePipe],
+  providers: [GoogleMapsAPIWrapper],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -22,9 +24,16 @@ import {
     MatGridListModule,
     MatIconModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule,
+    MatRippleModule,
+    AgmCoreModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCJO8-vFe0zqQaSrzIqcpftDiwJYbQB2bQ'
+      //apiKey: 'AIzaSyDEhMCTsKcRrtSy59Nmn4PgCPxE8DTurSY'
+    })
   ],
-  exports: [UserTabComponent,
+  exports: [
     CapitalizePipe,
     MatButtonModule,
     MatCardModule,
@@ -32,7 +41,12 @@ import {
     MatGridListModule,
     MatIconModule,
     MatListModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTableModule,
+    MatInputModule,
+    MatRippleModule,
+    AgmCoreModule,
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}
