@@ -1,14 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { NgxsModule } from '@ngxs/store';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
-// import { UsersState } from './store/users';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { HttpClientModule } from '@angular/common/http';
-import { CoreModule } from './core/core.module';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {NgxsModule} from '@ngxs/store';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {environment} from '../environments/environment';
+import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {UsersState} from './store/users/state/users.state';
+import {TokenInterceptor} from './core/Interceptor/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -17,17 +17,21 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoreModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgxsModule.forRoot([]),
+    NgxsModule.forRoot([UsersState]),
     NgxsReduxDevtoolsPluginModule.forRoot({
       name: 'NGXS Wintego Store',
       disabled: environment.production
     }),
 
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,18 +1,18 @@
-import { Action, Selector, State, StateContext } from '@ngxs/store';
+import {Action, Selector, State, StateContext} from '@ngxs/store';
 import * as fromAction from '../actions';
-import { catchError, map } from 'rxjs/operators';
-import { of } from 'rxjs';
-import {LoggerService} from "../../service/logger.service";
-import {IloggerModel} from "../../../../core/model/Ilogger.model";
+import {catchError, map} from 'rxjs/operators';
+import {of} from 'rxjs';
+import {LoggerService} from '../../service/logger.service';
+import {LoggerModel} from '../../../../model/Ilogger.model';
 
 export class LoggerStateModel {
-  data: IloggerModel[];
+  data: LoggerModel[];
   loaded: boolean;
   loading: boolean;
 }
 
 @State<LoggerStateModel>({
-  name: 'usersState',
+  name: 'loggerState',
   defaults: {
     data: [],
     loaded: false,
@@ -22,20 +22,19 @@ export class LoggerStateModel {
 
 
 export class LoggerState {
-  constructor(private userSrv: LoggerService) {
+  constructor(private loggerService: LoggerService) {
   }
 
   @Selector()
-  static getLoggerDetailData(state: LoggerStateModel): Array<IloggerModel> {
+  static getLoggerDetailData(state: LoggerStateModel): Array<LoggerModel> {
     return state.data;
   }
 
 
-
   @Action(fromAction.LoggerListDetail)
-  UsersListDetails({ dispatch, patchState }: StateContext<LoggerStateModel>) {
-    patchState({ loading: true });
-    return this.userSrv.getAllLoggerDetails()
+  LoggerListDetail({dispatch, patchState}: StateContext<LoggerStateModel>) {
+    patchState({loading: true});
+    return this.loggerService.getAllLoggerDetails()
       .pipe(
         map((data) => {
           dispatch(new fromAction.LoggerListDetailSuccess(data));
@@ -45,8 +44,8 @@ export class LoggerState {
   }
 
   @Action(fromAction.LoggerListDetailSuccess)
-  UsersListDetailsSuccess({ patchState }: StateContext<LoggerStateModel>, action: fromAction.LoggerListDetailSuccess) {
-    const data = action.payload as IloggerModel[];
+  LoggerListDetailSuccess({patchState}: StateContext<LoggerStateModel>, action: fromAction.LoggerListDetailSuccess) {
+    const data = action.payload as LoggerModel[];
     patchState(
       {
         data,
@@ -57,7 +56,7 @@ export class LoggerState {
   }
 
   @Action(fromAction.LoggerListDetailFail)
-  UsersListDetailsFail({ patchState }: StateContext<LoggerStateModel>) {
+  LoggerListDetailFail({patchState}: StateContext<LoggerStateModel>) {
     patchState(
       {
         loading: false,

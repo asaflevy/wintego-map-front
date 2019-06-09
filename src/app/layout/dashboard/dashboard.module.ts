@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MapRoutingModule } from './map-routing.module';
 import { SharedModule } from '../../shared/shared.module';
-import { MapComponent } from './container/map.component';
+import { DashboardComponent } from './container/dashboard.component';
 import {AgmCoreModule} from '@agm/core';
+import {DashboardRoutingModule} from './dashboard-routing.module';
 
 @NgModule({
-  declarations: [MapComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     SharedModule,
-    MapRoutingModule,
+    DashboardRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCJO8-vFe0zqQaSrzIqcpftDiwJYbQB2bQ'
       //apiKey: 'AIzaSyDEhMCTsKcRrtSy59Nmn4PgCPxE8DTurSY'
     })
   ]
 })
-export class MapModule { }
+export class DashboardModule { }

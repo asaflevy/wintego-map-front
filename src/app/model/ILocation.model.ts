@@ -1,4 +1,4 @@
-export interface ILocationModel {
+export interface LocationModel {
   latitude?: number;
   longitude?: number;
   Type?: string;
@@ -6,4 +6,7 @@ export interface ILocationModel {
   region?: string;
   region_code?: string;
   info?: string;
+  label?: string;
+  iconUrl?: string;
+  _id: string;
 }

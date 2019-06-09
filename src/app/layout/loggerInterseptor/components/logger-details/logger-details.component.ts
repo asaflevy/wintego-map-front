@@ -1,5 +1,5 @@
 import {AfterContentInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IloggerModel} from "../../../../core/model/Ilogger.model";
+import {LoggerModel} from "../../../../model/Ilogger.model";
 import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
@@ -9,10 +9,10 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class LoggerDetailsComponent implements OnInit, AfterContentInit {
 
-  @Input() loggerDetail: IloggerModel[];
+  @Input() loggerDetail: LoggerModel[];
   @Output() onMarkerSelected = new EventEmitter();
   displayedColumns: string[] = ['created_date', 'ip', 'city', 'region_code', 'longitude', 'latitude'];
-  dataSource: MatTableDataSource<IloggerModel> = null;
+  dataSource: MatTableDataSource<LoggerModel> = null;
 
   constructor() {
   }
@@ -27,7 +27,7 @@ export class LoggerDetailsComponent implements OnInit, AfterContentInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  onRowSelected(row:IloggerModel){
+  onRowSelected(row:LoggerModel){
     this.onMarkerSelected.emit(row);
 
   }

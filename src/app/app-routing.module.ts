@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from './shared/guard';
+import {AuthGuard} from './core/auth/auth-guard.srv';
+import {AuthService} from './core/auth/auth.srv';
+import {SharedModule} from './shared/shared.module';
 
 const routes: Routes = [
   {
@@ -8,14 +10,15 @@ const routes: Routes = [
     loadChildren: './layout/layout.module#LayoutModule',
     canActivate: [AuthGuard]
   },
-  {path: 'login',  loadChildren: './login/login.module#LoginModule'},
-  {path: 'dashbaord', loadChildren: 'src/app/layout/map/map.module#MapModule'},
+  {path: 'login', loadChildren: './login/login.module#LoginModule'},
+  {path: 'dashbaord', loadChildren: 'src/app/layout/dashboard/dashboard.module#DashboardModule'},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), SharedModule],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard, AuthService
+  ]
 })
 export class AppRoutingModule {
 }

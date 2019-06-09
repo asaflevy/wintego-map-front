@@ -37,6 +37,7 @@
     "include-media": "^1.4.9",
     "jquery": "^3.4.0",
     "lodash": "^4.17.11",
+    "ngx-openlayers": "^0.8.22",
     "ngx-popper": "^6.0.7",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",

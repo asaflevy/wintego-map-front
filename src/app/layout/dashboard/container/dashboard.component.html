@@ -1,0 +1,10 @@
+<div class="dashboard-container">
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+    <div class="dashboard-marker"  *ngFor="let marker of (userData)?.fkLocation">
+      <agm-marker [label]="{fontSize: '0px', id:getMarkerId(marker._id)}"  [animation]="2" (markerClick)="onMarkerClicked($event)"
+                  [latitude]="marker.latitude"  [longitude]="marker.longitude">
+      </agm-marker>
+    </div>
+  </agm-map>
+
+</div>

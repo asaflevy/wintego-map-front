@@ -1,0 +1,75 @@
+{{markerData | json}}
+<form novalidate>
+  <button [mat-dialog-close]="true" class="dialog-close" mat-button>×</button>
+  <div class="marker-edit-container">
+    <div class="top-title">
+      <h2 mat-dialog-title>
+      </h2>
+
+    </div>
+    <div class="marker-edit-container-main">
+      <div mat-dialog-content>
+        <div class="marker-form">
+          <mat-card>
+            <mat-card-header>
+            </mat-card-header>
+
+            <mat-card-content>
+
+              <form [formGroup]="markerDetailForm" (ngSubmit)="onSubmitMarkerDetails(markerDetailForm.value)">
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="latitude" formControlName="latitude" required [(ngModel)]="latitude">
+                  <mat-error *ngIf="!markerDetailForm.controls['latitude'].valid && markerDetailForm.controls['latitude'].touched">
+                    must be flout number
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="longitude" formControlName="longitude" required [(ngModel)]="longitude">
+                  <mat-error *ngIf="!markerDetailForm.controls['longitude'].valid && markerDetailForm.controls['longitude'].touched">
+                    must be flout number
+                  </mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="windows info" formControlName="info"  [(ngModel)]="markerData.info">
+                </mat-form-field>
+
+
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="label" formControlName="label"  [(ngModel)]="markerData.label">
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="iconUrl" formControlName="iconUrl"  [(ngModel)]="markerData.iconUrl">
+                  <mat-error *ngIf="!markerDetailForm.controls['iconUrl'].valid && markerDetailForm.controls['iconUrl'].touched">
+                  </mat-error>
+
+                </mat-form-field>
+                <button class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!markerDetailForm.valid">Submit</button>
+              </form>
+
+            </mat-card-content>
+          </mat-card>
+
+
+        </div>
+        <div class="marker-map">
+          <div class="form-group">
+            <label>Enter address</label>
+            <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
+                   placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off"
+                   type="text" #search>
+          </div>
+          <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="6">
+            <agm-marker [animation]="1" [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                        (dragEnd)="markerDragEnd($event)"></agm-marker>
+          </agm-map>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</form>

@@ -3,10 +3,10 @@ import {CommonModule} from '@angular/common';
 
 import {MapRoutingModule} from './map-routing.module';
 import {SharedModule} from '../../shared/shared.module';
-import {LoggerComponent} from "./container/logger.component";
-import {LoggerService} from "./service/logger.service";
-import {NgxsModule} from "@ngxs/store";
-import {LoggerState} from "./store/state/logger.state";
+import {LoggerComponent} from './container/logger.component';
+import {LoggerService} from './service/logger.service';
+import {NgxsModule} from '@ngxs/store';
+import {LoggerState} from './store/state/logger.state';
 import {LoggerDetailsComponent} from './components/logger-details/logger-details.component';
 
 @NgModule({

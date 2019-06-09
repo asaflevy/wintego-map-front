@@ -14,7 +14,7 @@ const routes: Routes = [
             },
             {
                 path: 'dashboard',
-                loadChildren: './map/map.module#MapModule'
+                loadChildren: './dashboard/dashboard.module#DashboardModule'
             },
           {
             path: 'logger',

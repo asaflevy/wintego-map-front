@@ -1,4 +1,4 @@
-import {IloggerModel} from "../../../../core/model/Ilogger.model";
+import {LoggerModel} from '../../../../model/Ilogger.model';
 
 export const LOGGER_LIST_DETAILS = '[LOGGER] LOGGER_LIST_DETAILS';
 export const LOGGER_LIST_DETAILS_SUCCESS = '[LOGGER] LOGGER_LIST_DETAILS_SUCCESS';
@@ -16,7 +16,7 @@ export class LoggerListDetail {
 export class LoggerListDetailSuccess {
   static readonly type = LOGGER_LIST_DETAILS_SUCCESS;
 
-  constructor(public payload: IloggerModel[]) {
+  constructor(public payload: LoggerModel[]) {
   }
 }
 
