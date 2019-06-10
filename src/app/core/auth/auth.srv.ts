@@ -38,12 +38,12 @@ export class AuthService implements OnInit {
   }
 
   logout() {
-    this.removeUserToken();
+    return this.removeUserToken();
+    this.router.navigate(['/']);
   }
 
   removeUserToken(): void {
     localStorage.removeItem('currentUser');
-    this.router.navigate(['/']);
   }
 
 

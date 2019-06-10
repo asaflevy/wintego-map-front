@@ -1,5 +1,5 @@
 import {AfterContentInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {LoggerModel} from "../../../../model/Ilogger.model";
+import {LoggerModel} from '../../../../model/Ilogger.model';
 import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
@@ -27,7 +27,8 @@ export class LoggerDetailsComponent implements OnInit, AfterContentInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  onRowSelected(row:LoggerModel){
+
+  onRowSelected(row: LoggerModel) {
     this.onMarkerSelected.emit(row);
 
   }

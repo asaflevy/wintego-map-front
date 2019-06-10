@@ -3,9 +3,15 @@ import {CommonModule} from '@angular/common';
 import {CapitalizePipe} from './capitalize.pipe';
 import {
   MatBadgeModule,
-  MatButtonModule, MatCardModule, MatCheckboxModule, MatDialog, MatDialogModule,
-  MatGridListModule, MatIconModule, MatInputModule,
-  MatListModule, MatRippleModule,
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatRippleModule,
   MatTableModule
 } from '@angular/material';
 import {AgmCoreModule, GoogleMapsAPIWrapper} from '@agm/core';

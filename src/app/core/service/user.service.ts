@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable, Subject, throwError as observableThrowError} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Observable, throwError as observableThrowError} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {UserModel} from '../../model/user.model';
 import {catchError} from 'rxjs/operators';

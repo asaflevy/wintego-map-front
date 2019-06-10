@@ -3,27 +3,27 @@ import * as fromState from './../store';
 import {Observable} from 'rxjs';
 import {LoggerModel} from '../../../model/Ilogger.model';
 import {Select, Store} from '@ngxs/store';
-import { MapsAPILoader, AgmMap } from '@agm/core';
-import { GoogleMapsAPIWrapper } from '@agm/core/services';
+import {AgmMap} from '@agm/core';
+
 declare var google;
+
 @Component({
   selector: 'app-map',
   templateUrl: './logger.component.html',
   styleUrls: ['./logger.component.less']
 })
 export class LoggerComponent implements OnInit, AfterViewInit {
-  bounds  = new google.maps.LatLngBounds();
-  constructor(private store: Store) {
-    this.store.dispatch(new fromState.LoggerListDetail());
-  }
-
+  bounds = new google.maps.LatLngBounds();
   @Select(fromState.LoggerState.getLoggerDetailData) loggerData$: Observable<LoggerModel[]>;
-
   @ViewChild(AgmMap) agmMap;
   map: any = null;
   zoom = 18;
   lat = 32.816;
   lng = 34.9821;
+
+  constructor(private store: Store) {
+    this.store.dispatch(new fromState.LoggerListDetail());
+  }
 
   ngOnInit() {
   }

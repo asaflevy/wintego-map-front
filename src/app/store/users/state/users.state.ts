@@ -82,12 +82,11 @@ export class UsersState {
 
   @Action(fromAction.UserUpdateLocationSuccess)
   UserUpdateLocationSuccess({patchState, getState}: StateContext<UsersListStateModel>, action: fromAction.UsersDetailsSuccess) {
-    let data  = getState().data;
+    let data = getState().data;
     const newLocation = data.fkLocation.filter((loc) => {
       return loc._id === action.payload._id;
     });
     data = {...data, ...newLocation};
-    debugger;
     patchState(
       {
         data,

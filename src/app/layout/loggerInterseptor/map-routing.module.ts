@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import {LoggerComponent} from "./container/logger.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {LoggerComponent} from './container/logger.component';
 
 const routes: Routes = [
-  { path: '', component: LoggerComponent }
+  {path: '', component: LoggerComponent}
 ];
 
 @NgModule({

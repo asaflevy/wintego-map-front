@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Location} from '@angular/common';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {Router} from '@angular/router';
 import {MarkerEditComponent} from '../marker-edit.component';
 
@@ -20,6 +19,7 @@ export class MarkerEditDialogService {
       data
     });
 
-    dialogRef.afterClosed().subscribe(result => {});
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 }

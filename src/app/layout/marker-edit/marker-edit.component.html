@@ -16,38 +16,43 @@
 
             <mat-card-content>
 
-              <form [formGroup]="markerDetailForm" (ngSubmit)="onSubmitMarkerDetails(markerDetailForm.value)">
+              <form (ngSubmit)="onSubmitMarkerDetails(markerDetailForm.value)" [formGroup]="markerDetailForm">
                 <mat-form-field class="full-width">
-                  <input matInput placeholder="latitude" formControlName="latitude" required [(ngModel)]="latitude">
-                  <mat-error *ngIf="!markerDetailForm.controls['latitude'].valid && markerDetailForm.controls['latitude'].touched">
+                  <input [(ngModel)]="latitude" formControlName="latitude" matInput placeholder="latitude" required>
+                  <mat-error
+                    *ngIf="!markerDetailForm.controls['latitude'].valid && markerDetailForm.controls['latitude'].touched">
                     must be flout number
                   </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
-                  <input matInput placeholder="longitude" formControlName="longitude" required [(ngModel)]="longitude">
-                  <mat-error *ngIf="!markerDetailForm.controls['longitude'].valid && markerDetailForm.controls['longitude'].touched">
+                  <input [(ngModel)]="longitude" formControlName="longitude" matInput placeholder="longitude" required>
+                  <mat-error
+                    *ngIf="!markerDetailForm.controls['longitude'].valid && markerDetailForm.controls['longitude'].touched">
                     must be flout number
                   </mat-error>
                 </mat-form-field>
 
 
                 <mat-form-field class="full-width">
-                  <input matInput placeholder="windows info" formControlName="info"  [(ngModel)]="markerData.info">
+                  <input [(ngModel)]="markerData.info" formControlName="info" matInput placeholder="windows info">
                 </mat-form-field>
 
 
                 <mat-form-field class="full-width">
-                  <input matInput placeholder="label" formControlName="label"  [(ngModel)]="markerData.label">
+                  <input [(ngModel)]="markerData.label" formControlName="label" matInput placeholder="label">
                 </mat-form-field>
 
                 <mat-form-field class="full-width">
-                  <input matInput placeholder="iconUrl" formControlName="iconUrl"  [(ngModel)]="markerData.iconUrl">
-                  <mat-error *ngIf="!markerDetailForm.controls['iconUrl'].valid && markerDetailForm.controls['iconUrl'].touched">
+                  <input [(ngModel)]="markerData.iconUrl" formControlName="iconUrl" matInput placeholder="iconUrl">
+                  <mat-error
+                    *ngIf="!markerDetailForm.controls['iconUrl'].valid && markerDetailForm.controls['iconUrl'].touched">
                   </mat-error>
 
                 </mat-form-field>
-                <button class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!markerDetailForm.valid">Submit</button>
+                <button [disabled]="!markerDetailForm.valid" class="submit-btn" color="primary" mat-raised-button
+                        type="submit">Submit
+                </button>
               </form>
 
             </mat-card-content>
@@ -58,13 +63,13 @@
         <div class="marker-map">
           <div class="form-group">
             <label>Enter address</label>
-            <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
-                   placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off"
-                   type="text" #search>
+            <input #search (keydown.enter)="$event.preventDefault()" autocapitalize="off"
+                   autocorrect="off" class="form-control" placeholder="Search Nearest Location" spellcheck="off"
+                   type="text" type="text">
           </div>
           <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="6">
-            <agm-marker [animation]="1" [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
-                        (dragEnd)="markerDragEnd($event)"></agm-marker>
+            <agm-marker (dragEnd)="markerDragEnd($event)" [animation]="1" [latitude]="latitude" [longitude]="longitude"
+                        [markerDraggable]="true"></agm-marker>
           </agm-map>
         </div>
       </div>

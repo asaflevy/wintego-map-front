@@ -20,11 +20,10 @@ export class MarkerEditComponent implements OnInit, AfterContentInit {
   longitude: number;
   zoom: number;
   address: string;
-  private geoCoder;
   markerData: LocationModel;
-
   @ViewChild('search')
   public searchElementRef: ElementRef;
+  private geoCoder;
 
   constructor(private dialogRef: MatDialogRef<MarkerEditComponent>, @Inject(MAT_DIALOG_DATA) data: { markerData: LocationModel, userId: string | null }, private fb: FormBuilder,
               private store: Store,
@@ -76,8 +75,7 @@ export class MarkerEditComponent implements OnInit, AfterContentInit {
     this.store.dispatch(new fromUsers.UserUpdateLocation({userId: this.userId, location: this.markerData}));
   }
 
-  markerDragEnd($event: MouseEvent) {
-    console.log($event);
+  markerDragEnd($event: any) {
     this.latitude = $event.coords.lat;
     this.longitude = $event.coords.lng;
     this.markerData.latitude = this.latitude;

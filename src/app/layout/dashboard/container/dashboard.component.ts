@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {AgmMap, AgmMarker, MapsAPILoader} from '@agm/core';
+import {AgmMap, AgmMarker} from '@agm/core';
 import * as fromState from './../../../store/users';
 import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
@@ -20,6 +20,11 @@ declare var google;
 export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   @Select(fromState.UsersState.getUsersDetails) userData$: Observable<UserModel>;
   userData: UserModel;
+  @ViewChild(AgmMap) agmMap;
+  map: any = null;
+  zoom = 4;
+  lat = 51.678418;
+  lng = 7.809007;
 
   constructor(private store: Store, private authSrv: AuthService, private markerDlgSrv: MarkerEditDialogService, private mapSrv: MapService) {
 
@@ -32,13 +37,6 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
   }
-
-  @ViewChild(AgmMap) agmMap;
-  map: any = null;
-  zoom = 4;
-  lat = 51.678418;
-  lng = 7.809007;
-
 
   getMarkerId(id) {
     return id;

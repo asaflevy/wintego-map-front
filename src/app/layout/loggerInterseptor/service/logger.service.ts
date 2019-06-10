@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import {LoggerModel} from "../../../model/Ilogger.model";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {environment} from 'src/environments/environment';
+import {LoggerModel} from '../../../model/Ilogger.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,8 @@ export class LoggerService {
 
   private apiUrl = environment.baseApiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getAllLoggerDetails(): Observable<LoggerModel[]> {
     return this.http.get<LoggerModel[]>(`${this.apiUrl}/logger/getAll`)

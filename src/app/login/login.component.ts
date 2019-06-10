@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from "../core/auth/auth.srv";
-import {FormControl, FormGroup} from "@angular/forms";
+import {AuthService} from '../core/auth/auth.srv';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -23,10 +23,9 @@ export class LoginComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       const userData = this.form.value;
-      this.authSrv.login({email: userData.email, password: userData.password}).subscribe((resData)=>{
-        debugger
+      this.authSrv.login({email: userData.email, password: userData.password}).subscribe((resData) => {
         this.router.navigate(['/dashboard']);
-      })
+      });
     }
   }
 }
