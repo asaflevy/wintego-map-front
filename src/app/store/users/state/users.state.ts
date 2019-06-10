@@ -66,30 +66,35 @@ export class UsersState {
   }
 
 
-  @Action(fromAction.UserUpdateLocation)
-  UserUpdateLocation({dispatch, patchState}: StateContext<UsersListStateModel>, action: fromAction.UserUpdateLocation) {
+  @Action(fromAction.UserInsertOrUpdateLocation)
+  UserUpdateLocation({dispatch, patchState}: StateContext<UsersListStateModel>, action: fromAction.UserInsertOrUpdateLocation) {
     patchState({loading: true});
     const payload = action.payload;
 
     return this.userSrv.updateUserLocation(payload.userId, payload.location)
       .pipe(
         map((data) => {
-          dispatch(new fromAction.UserUpdateLocationSuccess(data));
+          dispatch(new fromAction.UserInsertOrUpdateLocationSuccess(data));
         }),
         catchError(error => of(dispatch(new fromAction.UserUpdateLocationFail(error))))
       );
   }
 
-  @Action(fromAction.UserUpdateLocationSuccess)
-  UserUpdateLocationSuccess({patchState, getState}: StateContext<UsersListStateModel>, action: fromAction.UsersDetailsSuccess) {
+  @Action(fromAction.UserInsertOrUpdateLocationSuccess)
+  // tslint:disable-next-line:max-line-length
+  UserInsertOrUpdateLocationSuccess({patchState, getState}: StateContext<UsersListStateModel>, action: fromAction.UserInsertOrUpdateLocationSuccess) {
     let data = getState().data;
     const newLocation = data.fkLocation.filter((loc) => {
       return loc._id === action.payload._id;
     });
-    data = {...data, ...newLocation};
+    if (newLocation.length) {
+      data = {...data, ...newLocation};
+    } else {
+      data.fkLocation.push(action.payload);
+    }
     patchState(
       {
-        data,
+        ...data,
         loading: false,
         loaded: true
       }

@@ -1,10 +1,12 @@
-import {AfterContentInit, Component, ElementRef, Inject, NgZone, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {LocationModel} from '../../model/ILocation.model';
 import {MapsAPILoader} from '@agm/core';
-import {Store} from '@ngxs/store';
+import {Actions, ofActionSuccessful, Store} from '@ngxs/store';
 import * as fromUsers from '../../store/users';
+import {MapService} from '../service/map.service';
+import {untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 declare var google;
 
@@ -13,7 +15,8 @@ declare var google;
   templateUrl: './marker-edit.component.html',
   styleUrls: ['./marker-edit.component.less']
 })
-export class MarkerEditComponent implements OnInit, AfterContentInit {
+export class MarkerEditComponent implements OnInit, AfterContentInit, OnDestroy {
+
   userId: string | null;
   markerDetailForm: FormGroup;
   latitude: number;
@@ -23,21 +26,25 @@ export class MarkerEditComponent implements OnInit, AfterContentInit {
   markerData: LocationModel;
   @ViewChild('search')
   public searchElementRef: ElementRef;
-  private geoCoder;
 
   constructor(private dialogRef: MatDialogRef<MarkerEditComponent>, @Inject(MAT_DIALOG_DATA) data: { markerData: LocationModel, userId: string | null }, private fb: FormBuilder,
+              public mapSrv: MapService,
+              private actions$: Actions,
               private store: Store,
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone) {
-    this.markerData = data.markerData[0];
+    this.markerData = data.markerData;
     this.userId = data.userId;
     this.latitude = this.markerData.latitude;
     this.longitude = this.markerData.longitude;
   }
 
   ngOnInit() {
-
+    this.actions$.pipe(ofActionSuccessful(fromUsers.UserInsertOrUpdateLocationSuccess), untilComponentDestroyed(this)).subscribe(() => {
+      this.dialogRef.close();
+    });
   }
+
 
   createForm() {
     this.markerDetailForm = this.fb.group({
@@ -72,7 +79,7 @@ export class MarkerEditComponent implements OnInit, AfterContentInit {
     if (this.markerDetailForm.invalid) {
       return;
     }
-    this.store.dispatch(new fromUsers.UserUpdateLocation({userId: this.userId, location: this.markerData}));
+    this.store.dispatch(new fromUsers.UserInsertOrUpdateLocation({userId: this.userId, location: this.markerData}));
   }
 
   markerDragEnd($event: any) {
@@ -80,24 +87,10 @@ export class MarkerEditComponent implements OnInit, AfterContentInit {
     this.longitude = $event.coords.lng;
     this.markerData.latitude = this.latitude;
     this.markerData.longitude = this.longitude;
-    this.getAddress(this.latitude, this.longitude);
   }
 
-  getAddress(latitude, longitude) {
-    this.geoCoder.geocode({location: {lat: latitude, lng: longitude}}, (results, status) => {
-      console.log(results);
-      console.log(status);
-      if (status === 'OK') {
-        if (results[0]) {
-          this.zoom = 12;
-          this.address = results[0].formatted_address;
-        } else {
-          console.log('No results found');
-        }
-      } else {
-        console.log('Geocoder failed due to: ' + status);
-      }
 
-    });
+  ngOnDestroy(): void {
   }
+
 }

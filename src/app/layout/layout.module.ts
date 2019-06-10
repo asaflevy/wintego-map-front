@@ -13,7 +13,6 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {TopnavComponent} from './components/topnav/topnav.component';
 import {LayoutRoutingModule} from './layout-routing.module';
 import {LayoutComponent} from './layout.component';
-import {NavComponent} from './nav/nav.component';
 import {MarkerEditComponent} from './marker-edit/marker-edit.component';
 import {MarkerEditDialogService} from './marker-edit/service/marker-edit.service';
 import {SharedModule} from '../shared/shared.module';
@@ -32,7 +31,7 @@ import {SharedModule} from '../shared/shared.module';
     MatMenuModule,
     MatListModule,
   ],
-  declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent, MarkerEditComponent],
+  declarations: [LayoutComponent, TopnavComponent, SidebarComponent, MarkerEditComponent],
   entryComponents: [MarkerEditComponent],
   exports: [MarkerEditComponent]
 })

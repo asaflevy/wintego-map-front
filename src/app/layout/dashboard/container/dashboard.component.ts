@@ -26,33 +26,36 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   lat = 51.678418;
   lng = 7.809007;
 
-  constructor(private store: Store, private authSrv: AuthService, private markerDlgSrv: MarkerEditDialogService, private mapSrv: MapService) {
+  constructor(private store: Store, private authSrv: AuthService, private markerDlgSrv: MarkerEditDialogService, public mapSrv: MapService) {
 
     this.userData$.pipe(untilComponentDestroyed(this)).subscribe(_resData => {
       this.userData = _resData;
       if (this.userData && this.userData.fkLocation) {
         const lat = this.userData.fkLocation[0].latitude;
         const log = this.userData.fkLocation[0].longitude;
-        this.mapSrv.canterMapAroundMarker(this.map, lat, log);
+        this.mapSrv.centerMapAroundMarker(this.map, lat, log);
       }
     });
   }
 
-  getMarkerId(id) {
-    return id;
+  ngOnInit() {
+
   }
 
-  onMarkerClicked(marker: AgmMarker) {
+
+  async onMarkerClicked(marker: AgmMarker) {
     const markerData = this.userData.fkLocation.filter((loc: LocationModel) => {
       return loc._id === marker.label['id'];
-    });
-    this.mapSrv.canterMapAroundMarker(this.map, marker.latitude, marker.longitude);
+    })[0];
+    await this.mapSrv.centerMapAroundMarker(this.map, marker.latitude, marker.longitude);
     this.markerDlgSrv.openMarkerEditDialog({markerData, userId: this.authSrv.getUserId()});
   }
 
-
-  ngOnInit() {
+  onAddLocation() {
+    const tempLocation = this.mapSrv.createLocation();
+    this.markerDlgSrv.openMarkerEditDialog({markerData: tempLocation, userId: this.authSrv.getUserId()});
   }
+
 
   ngAfterViewInit() {
     this.agmMap.mapReady.subscribe(map => {

@@ -5,9 +5,10 @@ import {SharedModule} from '../../shared/shared.module';
 import {DashboardComponent} from './container/dashboard.component';
 import {AgmCoreModule} from '@agm/core';
 import {DashboardRoutingModule} from './dashboard-routing.module';
+import { MapActionComponent } from './components/map-action/map-action.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, MapActionComponent],
   imports: [
     CommonModule,
     SharedModule,

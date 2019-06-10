@@ -1,11 +1,16 @@
 <div class="map-container">
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-    <agm-marker *ngFor="let marker of (loggerData$ | async)" [latitude]="marker?.fkLocation.latitude"
-                [longitude]="marker?.fkLocation.longitude">
-    </agm-marker>
-  </agm-map>
-  <app-logger-details (onMarkerSelected)="markerSelected($event)" *ngIf="(loggerData$ | async).length"
-                      [loggerDetail]="(loggerData$ | async) ">
+  <div class="app-logger-details-container">
+    <app-logger-details (onMarkerSelected)="markerSelected($event)" *ngIf="(loggerData$ | async).length"
+                        [loggerDetail]="(loggerData$ | async) ">
 
-  </app-logger-details>
+    </app-logger-details>
+  </div>
+  <div class="agm-map-container">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+      <agm-marker *ngFor="let marker of (loggerData$ | async)" [latitude]="marker?.fkLocation.latitude"
+                  [longitude]="marker?.fkLocation.longitude">
+      </agm-marker>
+    </agm-map>
+  </div>
+
 </div>
