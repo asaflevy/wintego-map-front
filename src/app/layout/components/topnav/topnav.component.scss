@@ -12,23 +12,12 @@
   text-align: center;
 }
 
-.topnav-icon {
-  text-decoration: none;
-  display: flex;
-  color: #fff;
-}
+
 
 .nav-spacer {
   flex: 1 1 auto;
 }
 
-.visible-md {
-  display: none;
-}
-
-.visible-sm {
-  display: none;
-}
 
 @media screen and (max-width: 992px) {
   .visible-md {

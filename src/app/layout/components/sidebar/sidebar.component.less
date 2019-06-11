@@ -1,16 +1,27 @@
+@import './../../../../styles/_variables';
+
 #sidebar {
   width: 250px;
   position: fixed;
   top: 56px;
   bottom: 0;
-  background: #fff;
+  background: @secondary-color;
   box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
   z-index: 999;
   -ms-overflow-y: auto;
   overflow-y: auto;
 
+  .mat-list-item {
+    color: @primary-color;
+  }
+
+
   .mat-nav-list {
     width: 100%;
+
+    .active {
+      background: @color-dark-grey;
+    }
 
     a {
       .mat-icon {
@@ -22,32 +33,6 @@
   }
 }
 
-.nested-menu {
-  .nested {
-    list-style-type: none;
-  }
-
-  .submenu {
-    display: none;
-    height: 0;
-  }
-
-  & .expand {
-    &.submenu {
-      display: block;
-      list-style-type: none;
-      height: auto;
-      margin: 0;
-
-      li {
-        a {
-          padding: 10px;
-          display: block;
-        }
-      }
-    }
-  }
-}
 
 @media screen and (max-width: 992px) {
   #sidebar {

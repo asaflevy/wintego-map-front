@@ -29,15 +29,20 @@
 
     <ng-container matColumnDef="latitude">
       <th *matHeaderCellDef mat-header-cell> latitude</th>
-      <td *matCellDef="let element" mat-cell> {{element.fkLocation.latitude}} </td>
+      <td *matCellDef="let element" mat-cell> {{element.fkLocation?.latitude}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="longitude">
+    <ng-container matColumnDef="longitude" stickyEnd>
       <th *matHeaderCellDef mat-header-cell> longitude</th>
       <td *matCellDef="let element" mat-cell> {{element.fkLocation?.longitude}} </td>
     </ng-container>
 
-    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <ng-container matColumnDef="message" stickyEnd>
+      <th *matHeaderCellDef mat-header-cell> longitude</th>
+      <td *matCellDef="let element" mat-cell> {{element.message}} </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns sticky: true" mat-header-row></tr>
     <tr (click)="onRowSelected(row)" *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
 
   </table>

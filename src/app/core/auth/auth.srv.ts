@@ -13,7 +13,6 @@ import {AuthModel} from '../../model/auth.model';
 export class AuthService implements OnInit {
 
   private loginUrl = `${environment.baseUrl}/auth/signIn`;
-  private apiUrl = `${environment.baseApiUrl}`;
 
   constructor(private http: HttpClient, private router: Router, private store: Store, private dialog: MatDialog) {
   }
@@ -30,6 +29,7 @@ export class AuthService implements OnInit {
       })
     };
     return this.http
+    // tslint:disable-next-line:max-line-length
       .post<any>(this.loginUrl, `email=${encodeURIComponent(userData.email)}&password=${encodeURIComponent(userData.password)}`, httpOptions)
       .pipe(
         tap((res) => this.setCurrentUser(res)),

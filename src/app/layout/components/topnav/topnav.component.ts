@@ -12,19 +12,13 @@ export class TopnavComponent implements OnInit {
 
   constructor(public router: Router, private authSrv: AuthService) {
     this.router.events.subscribe(val => {
-      if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
+      if (val instanceof NavigationEnd && window.innerWidth <= 992) {
         this.toggleSidebar();
       }
     });
   }
 
-  ngOnInit() {
-    this.pushRightClass = 'push-right';
-  }
-
-  isToggled(): boolean {
-    const dom: Element = document.querySelector('body');
-    return dom.classList.contains(this.pushRightClass);
+  ngOnInit(): void {
   }
 
   toggleSidebar() {
@@ -36,4 +30,6 @@ export class TopnavComponent implements OnInit {
     this.authSrv.logout();
     this.router.navigate(['/login']);
   }
+
 }
+

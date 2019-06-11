@@ -19,7 +19,5 @@ export class MarkerEditDialogService {
       data
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-    });
   }
 }

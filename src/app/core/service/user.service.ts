@@ -27,7 +27,7 @@ export class UserService {
   updateUserLocation(userId: string, location: LocationModel): Observable<UserModel> {
     const updateLocationDto = {userId, ...location};
     return this.http
-      .post<UserModel>(`${this.apiUrl}/users/updateLocation`, {updateLocationDto})
+      .post<UserModel>(`${this.apiUrl}/users/updateOrInsertLocation`, {updateLocationDto})
       .pipe(catchError((error: any) => observableThrowError(error.json())));
   }
 }

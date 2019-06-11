@@ -5,6 +5,7 @@
   flex-flow: row;
 }
 
+
 agm-map {
   height: 90vh;
   width: 100%;
@@ -16,12 +17,20 @@ agm-map {
     display: flex;
     flex-direction: row;
 
+    .form-search-address-container {
+      min-width: 300px;
+    }
+
     .marker-form {
       min-width: 300px;
 
+      & .marker-form-card {
+        height: 100%;
+        margin-right: 9px;
+      }
+
       .mat-card-content {
-        display: flex;
-        flex-direction: column;
+
 
         & form {
           display: flex;
@@ -35,6 +44,7 @@ agm-map {
     .marker-map {
       display: flex;
       width: 100%;
+      flex-flow: column;
     }
   }
 

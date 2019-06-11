@@ -8,7 +8,9 @@ export const USER_DETAILS_FAIL = '[USER] USER_DETAILS_FAIL';
 
 export const USER_UPDATE_LOCATION = '[USER] USER_UPDATE_LOCATION';
 export const USER_UPDATE_LOCATION_SUCCESS = '[USER] USER_UPDATE_LOCATION_SUCCESS';
-export const USER_DETAILS_LOCATION_FAIL = '[USER] USER_DETAILS_LOCATION_FAIL';
+export const USER_UPDATE_LOCATION_FAIL = '[USER] USER_UPDATE_LOCATION_FAIL';
+
+
 
 
 export class UsersDetails {
@@ -34,7 +36,7 @@ export class UsersDetailsFail {
 }
 
 
-export class UserUpdateLocation {
+export class UserInsertOrUpdateLocation {
 
   static readonly type = USER_UPDATE_LOCATION;
 
@@ -43,7 +45,7 @@ export class UserUpdateLocation {
 }
 
 
-export class UserUpdateLocationSuccess {
+export class UserInsertOrUpdateLocationSuccess {
   static readonly type = USER_UPDATE_LOCATION_SUCCESS;
 
   constructor(public payload: LocationModel) {
@@ -52,13 +54,11 @@ export class UserUpdateLocationSuccess {
 
 
 export class UserUpdateLocationFail {
-  static readonly type = USER_DETAILS_LOCATION_FAIL;
+  static readonly type = USER_UPDATE_LOCATION_FAIL;
 
   constructor(public payload: any | null) {
   }
 }
-
-
 
 
 
