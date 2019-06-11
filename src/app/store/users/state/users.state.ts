@@ -40,8 +40,8 @@ export class UsersState {
   }
 
   @Selector()
-  static isLoading(state: UsersListStateModel): UserModel {
-    return state.data;
+  static isLoading(state: UsersListStateModel): boolean {
+    return state.loading;
   }
 
 

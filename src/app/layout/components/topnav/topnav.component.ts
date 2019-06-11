@@ -5,7 +5,7 @@ import {AuthService} from '../../../core/auth/auth.srv';
 @Component({
   selector: 'app-topnav',
   templateUrl: './topnav.component.html',
-  styleUrls: ['./topnav.component.scss']
+  styleUrls: ['./topnav.component.less']
 })
 export class TopnavComponent implements OnInit {
   public pushRightClass: string;

@@ -12,7 +12,9 @@ import {
   MatIconModule,
   MatInputModule,
   MatListModule,
-  MatRippleModule, MatSelectModule,
+  MatProgressBarModule,
+  MatRippleModule,
+  MatSelectModule,
   MatSnackBarModule,
   MatTableModule
 } from '@angular/material';
@@ -20,10 +22,11 @@ import {AgmCoreModule, GoogleMapsAPIWrapper} from '@agm/core';
 import {AuthService} from '../core/auth/auth.srv';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AngularOpenlayersModule} from 'ngx-openlayers';
+import {ProgressBarComponent} from '../layout/components/app-progras-bar/app-progress-bar.component';
 
 
 @NgModule({
-  declarations: [CapitalizePipe],
+  declarations: [CapitalizePipe, ProgressBarComponent],
   providers: [
     GoogleMapsAPIWrapper, AuthService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
@@ -46,11 +49,14 @@ import {AngularOpenlayersModule} from 'ngx-openlayers';
     AgmCoreModule,
     MatSnackBarModule,
     MatSelectModule,
+    MatProgressBarModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCJO8-vFe0zqQaSrzIqcpftDiwJYbQB2bQ'
     })
   ],
   exports: [
+    ProgressBarComponent,
+    MatProgressBarModule,
     MatSelectModule,
     MatSnackBarModule,
     AngularOpenlayersModule,

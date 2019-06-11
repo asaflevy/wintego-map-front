@@ -1,5 +1,8 @@
 <div class="dashboard-container">
+  <app-progress-bar [isLoading]="(isLoading$ | async)"></app-progress-bar>
   <mat-card>
+    {{authSrv.getUserId()}}----
+    {{selectedUserId}}
     <app-map-action [disabled]="authSrv.getUserId() !== selectedUserId" [userList]="(userList$ | async)" [showUsersSelection]="userSrv.isAdminUser()"
                     (onNewLocationAction)="onAddLocation()"></app-map-action>
   </mat-card>

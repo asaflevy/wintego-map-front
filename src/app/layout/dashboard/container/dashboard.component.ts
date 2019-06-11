@@ -20,6 +20,7 @@ declare var google;
 })
 export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  @Select(fromState.UsersState.isLoading) isLoading$: Observable<boolean>;
   @Select(fromState.UsersState.getUsersDetails) userData$: Observable<UserModel>;
   @Select(fromState.UsersState.getAllUsers) userList$: Observable<UserModel[]>;
 
@@ -35,9 +36,10 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private store: Store, public authSrv: AuthService, public userSrv: UserService,
               private markerDlgSrv: MarkerEditDialogService, public mapSrv: MapService) {
 
+    this.selectedUserId = this.authSrv.getUserId();
+
     this.userData$.pipe(untilComponentDestroyed(this)).subscribe(resData => {
       this.userData = resData;
-      this.selectedUserId = this.authSrv.getUserId();
       if (this.userData && this.userData.fkLocation && this.userData.fkLocation.length) {
         const lat = this.userData.fkLocation[0].latitude;
         const log = this.userData.fkLocation[0].longitude;

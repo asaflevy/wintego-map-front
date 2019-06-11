@@ -1,0 +1,65 @@
+@import '../../../../styles/_variables';
+
+:host {
+  ::ng-deep .mat-progress-bar-fill::after {
+    background-color: @secondary-primary-color;
+  }
+
+  ::ng-deep .mat-progress-bar-buffer {
+    background: #E4E8EB;
+  }
+
+  ::ng-deep .mat-progress-bar {
+    border-radius: 2px;
+  }
+
+}
+
+.art-top-progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 57px;
+  width: 100%;
+  left: 0px;
+  z-index: 999999999999;
+
+  .art-top-progress-bar__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  svg {
+    animation: rotate 10s linear infinite;
+  }
+
+  svg polygon {
+    stroke-dasharray: 17;
+    animation: dash 2.5s cubic-bezier(0.35, 0.04, 0.63, 0.95) infinite;
+  }
+
+
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 136;
+    }
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+}
