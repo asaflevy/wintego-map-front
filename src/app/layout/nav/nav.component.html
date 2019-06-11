@@ -1,5 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer [attr.role]="isHandset ? 'dialog' : 'navigation'" [mode]="(isHandset | async)!.matches ? 'over' : 'side'" [opened]="!(isHandset | async)!.matches"
+  <mat-sidenav #drawer [attr.role]="isHandset ? 'dialog' : 'navigation'"
+               [mode]="(isHandset | async)!.matches ? 'over' : 'side'" [opened]="!(isHandset | async)!.matches"
                class="sidenav"
                fixedInViewport="true">
     <mat-toolbar color="primary">SB Admin Marerial</mat-toolbar>

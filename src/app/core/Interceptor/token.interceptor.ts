@@ -10,11 +10,10 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!request.url.match(/signIn/g) && this.authService.isLoggedIn()) { // api call
+    if (!request.url.match(/signIn/g) && this.authService.isLoggedIn()) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${this.authService.getAccessToken()}`,
-          'Content-Type': 'application/json'
+          Authorization: `Bearer ${this.authService.getAccessToken()}`
         }
 
       });
