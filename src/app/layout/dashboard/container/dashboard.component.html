@@ -1,13 +1,23 @@
 <div class="dashboard-container">
   <mat-card>
-    <app-map-action (onNewLocationAction)="onAddLocation()"></app-map-action>
+    <app-map-action [disabled]="authSrv.getUserId() !== selectedUserId" [userList]="(userList$ | async)" [showUsersSelection]="userSrv.isAdminUser()"
+                    (onNewLocationAction)="onAddLocation()"></app-map-action>
   </mat-card>
-  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+  <agm-map #gm [latitude]="lat" [longitude]="lng" [zoom]="zoom">
     <div *ngFor="let marker of (userData)?.fkLocation" class="dashboard-marker">
-      <agm-marker (markerClick)="onMarkerClicked($event)" [animation]="2"
+      <agm-marker [animation]="2"
                   [label]="{fontSize: '16px', text:mapSrv.getLocationProperty(marker,'label'), id:mapSrv.getLocationProperty(marker,'_id')}"
                   [iconUrl]="marker.iconUrl"
-                  [latitude]="marker.latitude" [longitude]="marker.longitude">
+                  [latitude]="marker.latitude" [longitude]="marker.longitude"
+                  (markerClick)="onMarkerClicked($event)"
+                  (mouseOver)="onMouseOver(infoWindow,gm)"
+                  (mouseOut)="onMouseOut(infoWindow, $event)">
+        <agm-info-window [disableAutoPan]="false" #infoWindow>
+          <div class="gmap-info-window-container">
+            {{marker.info}}
+          </div>
+
+        </agm-info-window>
       </agm-marker>
     </div>
   </agm-map>

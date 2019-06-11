@@ -1,8 +1,8 @@
 import {AfterContentInit, Component, ElementRef, Inject, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {LocationModel} from '../../model/ILocation.model';
-import {MapsAPILoader} from '@agm/core';
+import {LocationModel} from '../../model/location.model';
+import {AgmInfoWindow, MapsAPILoader} from '@agm/core';
 import {Actions, ofActionSuccessful, Store} from '@ngxs/store';
 import * as fromUsers from '../../store/users';
 import {MapService} from '../service/map.service';
@@ -27,7 +27,9 @@ export class MarkerEditComponent implements OnInit, AfterContentInit, OnDestroy 
   @ViewChild('search')
   public searchElementRef: ElementRef;
 
-  constructor(private dialogRef: MatDialogRef<MarkerEditComponent>, @Inject(MAT_DIALOG_DATA) data: { markerData: LocationModel, userId: string | null }, private fb: FormBuilder,
+  constructor(private dialogRef: MatDialogRef<MarkerEditComponent>,
+              @Inject(MAT_DIALOG_DATA) data: { markerData: LocationModel, userId: string | null },
+              private fb: FormBuilder,
               public mapSrv: MapService,
               private actions$: Actions,
               private store: Store,
@@ -61,6 +63,8 @@ export class MarkerEditComponent implements OnInit, AfterContentInit, OnDestroy 
     const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
       types: ['address']
     });
+
+
     autocomplete.addListener('place_changed', () => {
       this.ngZone.run(() => {
         const place = google.maps.places.PlaceResult = autocomplete.getPlace();
@@ -71,6 +75,7 @@ export class MarkerEditComponent implements OnInit, AfterContentInit, OnDestroy 
         this.latitude = place.geometry.location.lat();
         this.longitude = place.geometry.location.lng();
         this.zoom = 12;
+
       });
     });
   }

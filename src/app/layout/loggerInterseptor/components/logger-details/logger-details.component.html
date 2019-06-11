@@ -8,22 +8,22 @@
 
 
     <ng-container matColumnDef="created_date">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header> date</th>
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Date</th>
       <td *matCellDef="let element" mat-cell> {{element.created_date  | date :'short'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="ip">
-      <th *matHeaderCellDef mat-header-cell> ip</th>
+      <th *matHeaderCellDef mat-header-cell> IP</th>
       <td *matCellDef="let element" mat-cell> {{element.ip}} </td>
     </ng-container>
 
     <ng-container matColumnDef="city">
-      <th *matHeaderCellDef mat-header-cell> city</th>
+      <th *matHeaderCellDef mat-header-cell> City</th>
       <td *matCellDef="let element" mat-cell> {{element.fkLocation?.city }} </td>
     </ng-container>
 
     <ng-container matColumnDef="region_code">
-      <th *matHeaderCellDef mat-header-cell> region</th>
+      <th *matHeaderCellDef mat-header-cell> Region</th>
       <td *matCellDef="let element" mat-cell> {{element.fkLocation?.region_code}} </td>
     </ng-container>
 
@@ -33,12 +33,12 @@
     </ng-container>
 
     <ng-container matColumnDef="longitude" stickyEnd>
-      <th *matHeaderCellDef mat-header-cell> longitude</th>
+      <th *matHeaderCellDef mat-header-cell> Longitude</th>
       <td *matCellDef="let element" mat-cell> {{element.fkLocation?.longitude}} </td>
     </ng-container>
 
     <ng-container matColumnDef="message" stickyEnd>
-      <th *matHeaderCellDef mat-header-cell> longitude</th>
+      <th *matHeaderCellDef mat-header-cell> Interceptor</th>
       <td *matCellDef="let element" mat-cell> {{element.message}} </td>
     </ng-container>
 

@@ -1,4 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {UserModel} from '../../../../model/user.model';
 
 @Component({
   selector: 'app-map-action',
@@ -7,6 +8,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class MapActionComponent implements OnInit {
 
+  @Input() showUsersSelection = false;
+  @Input() disabled = false;
+  @Input() userList: UserModel[] = [];
   @Output() onNewLocationAction = new EventEmitter<boolean>();
 
   constructor() {

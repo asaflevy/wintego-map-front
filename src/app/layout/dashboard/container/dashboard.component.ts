@@ -1,14 +1,15 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {AgmMap, AgmMarker} from '@agm/core';
+import {AgmInfoWindow, AgmMap, AgmMarker} from '@agm/core';
 import * as fromState from './../../../store/users';
 import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {UserModel} from '../../../model/user.model';
 import {untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
 import {MarkerEditDialogService} from '../../marker-edit/service/marker-edit.service';
-import {LocationModel} from '../../../model/ILocation.model';
+import {LocationModel} from '../../../model/location.model';
 import {MapService} from '../../service/map.service';
 import {AuthService} from '../../../core/auth/auth.srv';
+import {UserService} from '../../../core/service/user.service';
 
 declare var google;
 
@@ -18,19 +19,26 @@ declare var google;
   styleUrls: ['./dashboard.component.less']
 })
 export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
+
   @Select(fromState.UsersState.getUsersDetails) userData$: Observable<UserModel>;
+  @Select(fromState.UsersState.getAllUsers) userList$: Observable<UserModel[]>;
+
+  @ViewChild(AgmMap) gm;
+  @ViewChild(AgmInfoWindow) infoWindow;
+  selectedUserId: string;
   userData: UserModel;
-  @ViewChild(AgmMap) agmMap;
   map: any = null;
-  zoom = 4;
+  zoom = 6;
   lat = 51.678418;
   lng = 7.809007;
 
-  constructor(private store: Store, private authSrv: AuthService, private markerDlgSrv: MarkerEditDialogService, public mapSrv: MapService) {
+  constructor(private store: Store, public authSrv: AuthService, public userSrv: UserService,
+              private markerDlgSrv: MarkerEditDialogService, public mapSrv: MapService) {
 
-    this.userData$.pipe(untilComponentDestroyed(this)).subscribe(_resData => {
-      this.userData = _resData;
-      if (this.userData && this.userData.fkLocation) {
+    this.userData$.pipe(untilComponentDestroyed(this)).subscribe(resData => {
+      this.userData = resData;
+      this.selectedUserId = this.authSrv.getUserId();
+      if (this.userData && this.userData.fkLocation && this.userData.fkLocation.length) {
         const lat = this.userData.fkLocation[0].latitude;
         const log = this.userData.fkLocation[0].longitude;
         this.mapSrv.centerMapAroundMarker(this.map, lat, log);
@@ -39,7 +47,17 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.userSrv.getSelectedUser().pipe(untilComponentDestroyed(this)).subscribe((userId) => {
+      this.selectedUserId = userId;
+      this.store.dispatch(new fromState.UsersDetails(userId));
+    });
+  }
 
+  ngAfterViewInit() {
+    this.gm.mapReady.subscribe(map => {
+      this.map = map;
+      this.store.dispatch(new fromState.UsersDetails());
+    });
   }
 
 
@@ -56,13 +74,16 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.markerDlgSrv.openMarkerEditDialog({markerData: tempLocation, userId: this.authSrv.getUserId()});
   }
 
+  onMouseOver(infoWindow, gm) {
+    if (gm.lastOpen != null) {
+      gm.lastOpen.close();
+    }
+    gm.lastOpen = infoWindow;
+    infoWindow.open();
+  }
 
-  ngAfterViewInit() {
-    this.agmMap.mapReady.subscribe(map => {
-      this.map = map;
-      this.store.dispatch(new fromState.UsersDetails());
-
-    });
+  onMouseOut(infoWindow, $event: MouseEvent) {
+    infoWindow.close();
   }
 
   ngOnDestroy(): void {

@@ -4,17 +4,16 @@ import {environment} from '../../../environments/environment';
 import {Observable, throwError as observableThrowError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Store} from '@ngxs/store';
-import {MatDialog} from '@angular/material';
 import {UserLoginModel} from '../../model/user-login.model';
-import {AuthModel} from '../../model/auth.model';
+import {AuthModel, UserTypeModel} from '../../model/auth.model';
+import {MessageService} from '../service/message.service';
 
 @Injectable()
 export class AuthService implements OnInit {
 
   private loginUrl = `${environment.baseUrl}/auth/signIn`;
 
-  constructor(private http: HttpClient, private router: Router, private store: Store, private dialog: MatDialog) {
+  constructor(private http: HttpClient, private router: Router, private messageSrv: MessageService) {
   }
 
   ngOnInit() {
@@ -29,11 +28,14 @@ export class AuthService implements OnInit {
       })
     };
     return this.http
-    // tslint:disable-next-line:max-line-length
-      .post<any>(this.loginUrl, `email=${encodeURIComponent(userData.email)}&password=${encodeURIComponent(userData.password)}`, httpOptions)
+      .post<any>(this.loginUrl,
+        `email=${encodeURIComponent(userData.email)}&password=${encodeURIComponent(userData.password)}`, httpOptions)
       .pipe(
         tap((res) => this.setCurrentUser(res)),
-        catchError((error: any) => observableThrowError(error.json())));
+        catchError((error: any) => {
+          this.messageSrv.showMessage('Login fail');
+          return observableThrowError(error.json());
+        }));
 
   }
 
@@ -47,14 +49,6 @@ export class AuthService implements OnInit {
   }
 
 
-  jwtAuthorizationHeaderOnly(): any {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.access_token) {
-      return {Authorization: 'Bearer ' + currentUser.access_token, 'Content-Type': 'application/json'};
-    }
-    return {};
-  }
-
   getAccessToken(): string {
     if (this.isLoggedIn()) {
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -67,6 +61,14 @@ export class AuthService implements OnInit {
     if (this.isLoggedIn()) {
       const currentUser = JSON.parse(localStorage.getItem('currentUser')) as AuthModel;
       return currentUser.userId;
+    }
+    return null;
+  }
+
+  getUserType(): UserTypeModel | null {
+    if (this.isLoggedIn()) {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser')) as AuthModel;
+      return currentUser.role as UserTypeModel;
     }
     return null;
   }

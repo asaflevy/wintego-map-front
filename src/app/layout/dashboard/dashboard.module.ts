@@ -6,9 +6,10 @@ import {DashboardComponent} from './container/dashboard.component';
 import {AgmCoreModule} from '@agm/core';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import { MapActionComponent } from './components/map-action/map-action.component';
+import { UserSelectionComponent } from './components/user-selection/user-selection.component';
 
 @NgModule({
-  declarations: [DashboardComponent, MapActionComponent],
+  declarations: [DashboardComponent, MapActionComponent, UserSelectionComponent],
   imports: [
     CommonModule,
     SharedModule,

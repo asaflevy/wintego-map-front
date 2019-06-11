@@ -50,7 +50,8 @@
 
                 </mat-form-field>
                 <button [disabled]="!markerDetailForm.valid" class="submit-btn" color="primary" mat-raised-button
-                        type="submit">Submit
+                        type="submit">
+                  Submit
                 </button>
               </form>
 
@@ -75,7 +76,13 @@
             <agm-marker (dragEnd)="markerDragEnd($event)" [animation]="1" [latitude]="latitude" [longitude]="longitude"
                         [label]="{fontSize: '16px', text:mapSrv.getLocationProperty(markerData,'label'), id:mapSrv.getLocationProperty(markerData,'_id')}"
                         [iconUrl]="markerData.iconUrl"
-                        [markerDraggable]="true"></agm-marker>
+                        [markerDraggable]="true">
+              <agm-info-window [disableAutoPan]="false" [isOpen]="true">
+                <div class="gmap-info-window-container">
+                  {{markerData.info}}
+                </div>
+              </agm-info-window>
+            </agm-marker>
           </agm-map>
         </div>
       </div>

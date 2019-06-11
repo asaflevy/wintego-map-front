@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import * as fromState from './../store';
 import {Observable} from 'rxjs';
-import {LoggerModel} from '../../../model/Ilogger.model';
+import {LoggerModel} from '../../../model/logger.model';
 import {Select, Store} from '@ngxs/store';
 import {AgmMap} from '@agm/core';
 import {untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';

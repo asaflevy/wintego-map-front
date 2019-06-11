@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {GoogleMapsAPIWrapper} from '@agm/core';
-import {LocationModel} from '../../model/ILocation.model';
+import {LocationModel} from '../../model/location.model';
 import {LocationType} from '../../model/location-type.enum';
 
 declare var google;
@@ -20,7 +20,7 @@ export class MapService {
 
 
   createLocation(_id: string = null, latitude: number = 32.816, longitude: number = 34.9821, label: string = '', info: string = '',
-                 iconUrl: string = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'): LocationModel {
+                 iconUrl: string = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'): LocationModel {
     return {
       _id,
       latitude,

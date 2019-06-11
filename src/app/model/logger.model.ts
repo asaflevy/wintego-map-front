@@ -1,4 +1,4 @@
-import {LocationModel} from './ILocation.model';
+import {LocationModel} from './location.model';
 
 export interface LoggerModel {
   created_date: Date;

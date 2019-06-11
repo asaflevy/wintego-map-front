@@ -1,5 +1,5 @@
 import {AfterContentInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {LoggerModel} from '../../../../model/Ilogger.model';
+import {LoggerModel} from '../../../../model/logger.model';
 import {MatTableDataSource} from '@angular/material/table';
 
 @Component({

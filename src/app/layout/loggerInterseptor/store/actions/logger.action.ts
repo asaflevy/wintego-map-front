@@ -1,4 +1,4 @@
-import {LoggerModel} from '../../../../model/Ilogger.model';
+import {LoggerModel} from '../../../../model/logger.model';
 
 export const LOGGER_LIST_DETAILS = '[LOGGER] LOGGER_LIST_DETAILS';
 export const LOGGER_LIST_DETAILS_SUCCESS = '[LOGGER] LOGGER_LIST_DETAILS_SUCCESS';

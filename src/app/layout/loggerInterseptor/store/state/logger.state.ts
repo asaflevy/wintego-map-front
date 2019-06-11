@@ -3,7 +3,7 @@ import * as fromAction from '../actions';
 import {catchError, map} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {LoggerService} from '../../service/logger.service';
-import {LoggerModel} from '../../../../model/Ilogger.model';
+import {LoggerModel} from '../../../../model/logger.model';
 
 export class LoggerStateModel {
   data: LoggerModel[];

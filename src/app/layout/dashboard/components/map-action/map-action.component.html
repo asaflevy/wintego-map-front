@@ -1,3 +1,4 @@
 <div class="dashboard-action-container">
-  <button mat-raised-button (click)="onAddLocation()" >Add Location</button>
+  <button mat-raised-button (click)="onAddLocation()" [disabled]="disabled" >Add Location</button>
+  <app-user-selection *ngIf="showUsersSelection" [userList]="userList"></app-user-selection>
 </div>

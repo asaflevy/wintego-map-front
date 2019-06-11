@@ -1,17 +1,16 @@
 import {Injectable} from '@angular/core';
-import {MatDialog} from '@angular/material';
-import {Router} from '@angular/router';
+import {MatDialog, MatDialogRef} from '@angular/material';
 import {MarkerEditComponent} from '../marker-edit.component';
 
 
 @Injectable()
 export class MarkerEditDialogService {
 
-  constructor(private dialog: MatDialog, private router: Router) {
+  constructor(private dialog: MatDialog) {
   }
 
-  openMarkerEditDialog(data) {
-    const dialogRef = this.dialog.open(MarkerEditComponent, {
+  openMarkerEditDialog(data): MatDialogRef<any, any> {
+    return this.dialog.open(MarkerEditComponent, {
       width: '100vw',
       maxWidth: '100vw',
       height: '100vh',
