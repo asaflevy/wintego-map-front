@@ -1127,8 +1127,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 var environment = {
     production: false,
-    baseUrl: 'http://localhost:3000',
-    baseApiUrl: 'http://localhost:3000/api'
+    baseUrl: 'https://wintego-map-backend.herokuapp.com/',
+    baseApiUrl: 'https://wintego-map-backend.herokuapp.com/api'
 };
 
 
