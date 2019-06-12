@@ -16,6 +16,8 @@ declare var google;
 export class LoggerComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Select(fromState.LoggerState.getLoggerDetailData) loggerData$: Observable<LoggerModel[]>;
+  @Select(fromState.LoggerState.isLoading$) isLoading$: Observable<boolean>;
+
   @ViewChild(AgmMap) agmMap;
   map: any = null;
   zoom = 10;

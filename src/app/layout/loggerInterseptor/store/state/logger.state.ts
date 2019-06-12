@@ -30,6 +30,11 @@ export class LoggerState {
     return state.data;
   }
 
+  @Selector()
+  static isLoading$(state: LoggerStateModel): boolean {
+    return state.loading;
+  }
+
 
   @Action(fromAction.LoggerListDetail)
   LoggerListDetail({dispatch, patchState}: StateContext<LoggerStateModel>) {

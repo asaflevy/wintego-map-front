@@ -121,7 +121,7 @@ var LoggerDetailsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"map-container\">\n  <div class=\"app-logger-details-container\">\n    <app-logger-details (onMarkerSelected)=\"markerSelected($event)\" *ngIf=\"(loggerData$ | async).length\"\n                        [loggerDetail]=\"(loggerData$ | async) \">\n\n    </app-logger-details>\n  </div>\n  <div class=\"agm-map-container\">\n    <agm-map [latitude]=\"lat\" [longitude]=\"lng\" [zoom]=\"zoom\">\n      <agm-marker *ngFor=\"let marker of (loggerData$ | async)\" [latitude]=\"marker?.fkLocation.latitude\"\n                  [longitude]=\"marker?.fkLocation.longitude\">\n      </agm-marker>\n    </agm-map>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"logger-container\">\n  <app-progress-bar [isLoading]=\"(isLoading$ | async)\"></app-progress-bar>\n  <div class=\"app-logger-details-container\">\n    <app-logger-details (onMarkerSelected)=\"markerSelected($event)\" *ngIf=\"(loggerData$ | async).length\"\n                        [loggerDetail]=\"(loggerData$ | async) \">\n\n    </app-logger-details>\n  </div>\n  <div class=\"agm-map-container\">\n    <agm-map [latitude]=\"lat\" [longitude]=\"lng\" [zoom]=\"zoom\">\n      <agm-marker *ngFor=\"let marker of (loggerData$ | async)\" [latitude]=\"marker?.fkLocation.latitude\"\n                  [longitude]=\"marker?.fkLocation.longitude\">\n      </agm-marker>\n    </agm-map>\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -132,7 +132,7 @@ module.exports = "<div class=\"map-container\">\n  <div class=\"app-logger-detai
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host .map-container {\n  width: 100%;\n  height: 100%;\n}\n:host .map-container .agm-map-container {\n  height: 100%;\n}\n:host .map-container .agm-map-container agm-map {\n  height: 100%;\n}\n:host .app-logger-details-container {\n  background: #ffffff;\n  max-height: 40vh;\n  overflow: auto;\n  margin-bottom: 10px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hc2FmbGV2eS9wcm9qZWN0L3dpbnRlZ29fcHJvamVjdC93aW50ZWdvLW1hcC1mcm9udC9zcmMvYXBwL2xheW91dC9sb2dnZXJJbnRlcnNlcHRvci9jb250YWluZXIvbG9nZ2VyLmNvbXBvbmVudC5sZXNzIiwic3JjL2FwcC9sYXlvdXQvbG9nZ2VySW50ZXJzZXB0b3IvY29udGFpbmVyL2xvZ2dlci5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUVJLFdBQUE7RUFDQSxZQUFBO0FDRko7QUREQTtFQU1NLFlBQUE7QUNGTjtBREpBO0VBUVEsWUFBQTtBQ0RSO0FEUEE7RUFjSSxtQkFBQTtFQUNBLGdCQUFBO0VBQ0EsY0FBQTtFQUNBLG1CQUFBO0FDSkoiLCJmaWxlIjoic3JjL2FwcC9sYXlvdXQvbG9nZ2VySW50ZXJzZXB0b3IvY29udGFpbmVyL2xvZ2dlci5jb21wb25lbnQubGVzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuXG46aG9zdCB7XG4gIC5tYXAtY29udGFpbmVyIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG5cbiAgICAuYWdtLW1hcC1jb250YWluZXJ7XG4gICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICBhZ20tbWFwIHtcbiAgICAgICAgaGVpZ2h0OiAxMDAlO1xuICAgICAgfVxuICAgIH1cblxuICB9XG4gIC5hcHAtbG9nZ2VyLWRldGFpbHMtY29udGFpbmVye1xuICAgIGJhY2tncm91bmQ6ICNmZmZmZmY7XG4gICAgbWF4LWhlaWdodDogNDB2aDtcbiAgICBvdmVyZmxvdzogYXV0bztcbiAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xuICB9XG5cbn1cbiIsIjpob3N0IC5tYXAtY29udGFpbmVyIHtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbn1cbjpob3N0IC5tYXAtY29udGFpbmVyIC5hZ20tbWFwLWNvbnRhaW5lciB7XG4gIGhlaWdodDogMTAwJTtcbn1cbjpob3N0IC5tYXAtY29udGFpbmVyIC5hZ20tbWFwLWNvbnRhaW5lciBhZ20tbWFwIHtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuOmhvc3QgLmFwcC1sb2dnZXItZGV0YWlscy1jb250YWluZXIge1xuICBiYWNrZ3JvdW5kOiAjZmZmZmZmO1xuICBtYXgtaGVpZ2h0OiA0MHZoO1xuICBvdmVyZmxvdzogYXV0bztcbiAgbWFyZ2luLWJvdHRvbTogMTBweDtcbn1cbiJdfQ== */"
+module.exports = ":host .logger-container {\n  width: 100%;\n  height: 100%;\n}\n:host .logger-container .agm-map-container {\n  height: 100%;\n}\n:host .logger-container .agm-map-container agm-map {\n  height: 100%;\n}\n:host .app-logger-details-container {\n  background: #ffffff;\n  min-height: 100px;\n  max-height: 40vh;\n  overflow: auto;\n  margin-bottom: 10px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hc2FmbGV2eS9wcm9qZWN0L3dpbnRlZ29fcHJvamVjdC93aW50ZWdvLW1hcC1mcm9udC9zcmMvYXBwL2xheW91dC9sb2dnZXJJbnRlcnNlcHRvci9jb250YWluZXIvbG9nZ2VyLmNvbXBvbmVudC5sZXNzIiwic3JjL2FwcC9sYXlvdXQvbG9nZ2VySW50ZXJzZXB0b3IvY29udGFpbmVyL2xvZ2dlci5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUVJLFdBQUE7RUFDQSxZQUFBO0FDRko7QUREQTtFQU1NLFlBQUE7QUNGTjtBREpBO0VBUVEsWUFBQTtBQ0RSO0FEUEE7RUFjSSxtQkFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxjQUFBO0VBQ0EsbUJBQUE7QUNKSiIsImZpbGUiOiJzcmMvYXBwL2xheW91dC9sb2dnZXJJbnRlcnNlcHRvci9jb250YWluZXIvbG9nZ2VyLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiXG5cbjpob3N0IHtcbiAgLmxvZ2dlci1jb250YWluZXIge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogMTAwJTtcblxuICAgIC5hZ20tbWFwLWNvbnRhaW5lcntcbiAgICAgIGhlaWdodDogMTAwJTtcbiAgICAgIGFnbS1tYXAge1xuICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICB9XG4gICAgfVxuXG4gIH1cbiAgLmFwcC1sb2dnZXItZGV0YWlscy1jb250YWluZXJ7XG4gICAgYmFja2dyb3VuZDogI2ZmZmZmZjtcbiAgICBtaW4taGVpZ2h0OiAxMDBweDtcbiAgICBtYXgtaGVpZ2h0OiA0MHZoO1xuICAgIG92ZXJmbG93OiBhdXRvO1xuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XG4gIH1cblxufVxuIiwiOmhvc3QgLmxvZ2dlci1jb250YWluZXIge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuOmhvc3QgLmxvZ2dlci1jb250YWluZXIgLmFnbS1tYXAtY29udGFpbmVyIHtcbiAgaGVpZ2h0OiAxMDAlO1xufVxuOmhvc3QgLmxvZ2dlci1jb250YWluZXIgLmFnbS1tYXAtY29udGFpbmVyIGFnbS1tYXAge1xuICBoZWlnaHQ6IDEwMCU7XG59XG46aG9zdCAuYXBwLWxvZ2dlci1kZXRhaWxzLWNvbnRhaW5lciB7XG4gIGJhY2tncm91bmQ6ICNmZmZmZmY7XG4gIG1pbi1oZWlnaHQ6IDEwMHB4O1xuICBtYXgtaGVpZ2h0OiA0MHZoO1xuICBvdmVyZmxvdzogYXV0bztcbiAgbWFyZ2luLWJvdHRvbTogMTBweDtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -189,6 +189,10 @@ var LoggerComponent = /** @class */ (function () {
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_4__["Select"])(_store__WEBPACK_IMPORTED_MODULE_2__["LoggerState"].getLoggerDetailData),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"])
     ], LoggerComponent.prototype, "loggerData$", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_4__["Select"])(_store__WEBPACK_IMPORTED_MODULE_2__["LoggerState"].isLoading$),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", rxjs__WEBPACK_IMPORTED_MODULE_3__["Observable"])
+    ], LoggerComponent.prototype, "isLoading$", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_agm_core__WEBPACK_IMPORTED_MODULE_5__["AgmMap"]),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
@@ -514,6 +518,9 @@ var LoggerState = /** @class */ (function () {
     LoggerState.getLoggerDetailData = function (state) {
         return state.data;
     };
+    LoggerState.isLoading$ = function (state) {
+        return state.loading;
+    };
     LoggerState.prototype.LoggerListDetail = function (_a) {
         var dispatch = _a.dispatch, patchState = _a.patchState;
         patchState({ loading: true });
@@ -562,6 +569,12 @@ var LoggerState = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [LoggerStateModel]),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", Array)
     ], LoggerState, "getLoggerDetailData", null);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Selector"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [LoggerStateModel]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", Boolean)
+    ], LoggerState, "isLoading$", null);
     LoggerState = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["State"])({
             name: 'loggerState',

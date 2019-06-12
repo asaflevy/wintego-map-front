@@ -1126,8 +1126,8 @@ var UsersState = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 var environment = {
-    production: false,
-    baseUrl: 'https://wintego-map-backend.herokuapp.com/',
+    production: true,
+    baseUrl: 'https://wintego-map-backend.herokuapp.com',
     baseApiUrl: 'https://wintego-map-backend.herokuapp.com/api'
 };
 
