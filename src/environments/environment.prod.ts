@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost:3000/',
-  baseApiUrl: 'http://localhost:3000/api'
+  baseUrl: 'https://wintego-map-backend.herokuapp.com/',
+  baseApiUrl: 'https://wintego-map-backend.herokuapp.com/api'
 };
