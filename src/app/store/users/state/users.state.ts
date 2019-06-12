@@ -103,9 +103,11 @@ export class UsersState {
   UserInsertOrUpdateLocationSuccess({patchState, getState}: StateContext<UsersListStateModel>, action: fromAction.UserInsertOrUpdateLocationSuccess) {
     this.messageSrv.showMessage('update location data succeeded');
     let data = getState().data;
+
     const newLocation = data.fkLocation.filter((loc) => {
       return loc._id === action.payload._id;
     });
+
     if (newLocation.length) {
       data = {...data, ...newLocation};
     } else {

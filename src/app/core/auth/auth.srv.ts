@@ -82,4 +82,10 @@ export class AuthService implements OnInit {
     localStorage.setItem('currentUser', JSON.stringify(authRes));
   }
 
+  getCurrentUser() {
+    if (this.isLoggedIn()) {
+      return JSON.parse(localStorage.getItem('currentUser'));
+    }
+  }
+
 }

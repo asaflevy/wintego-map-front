@@ -9,6 +9,7 @@ import {AuthService} from '../../../core/auth/auth.srv';
 })
 export class TopnavComponent implements OnInit {
   public pushRightClass: string;
+  private user;
 
   constructor(public router: Router, private authSrv: AuthService) {
     this.router.events.subscribe(val => {
@@ -19,6 +20,8 @@ export class TopnavComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this.authSrv.getCurrentUser();
+
   }
 
   toggleSidebar() {

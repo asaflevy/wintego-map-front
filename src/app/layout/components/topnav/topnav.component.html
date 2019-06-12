@@ -4,11 +4,16 @@
   </button>
   <div class="nav-brand">
     Wintego Map
+    <div class="user-name">
+      {{this.user?.firstName}} {{this.user?.lastName}}
+    </div>
   </div>
+
   <span class="nav-spacer"></span>
   <form class="hidden-sm" style="margin-left: 20px; margin-top: 5px">
     <span class="nav-spacer"></span>
-    <a class="hidden-sm" href="https://github.com/asaflevy/wintego-map-front"  mat-raised-button style="margin-right: 10px">
+    <a class="hidden-sm" href="https://github.com/asaflevy/wintego-map-front" mat-raised-button
+       style="margin-right: 10px">
       <mat-icon>cloud_download</mat-icon>
       {{ 'Download Now' }}
     </a>

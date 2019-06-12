@@ -1,6 +1,7 @@
 @import '../../../../styles/_variables';
 
 :host {
+
   ::ng-deep .mat-progress-bar-fill::after {
     background-color: @secondary-primary-color;
   }
@@ -14,6 +15,9 @@
   }
 
 }
+
+
+
 
 .art-top-progress-bar {
   display: flex;
@@ -34,32 +38,6 @@
     flex-direction: column;
   }
 
-  svg {
-    animation: rotate 10s linear infinite;
-  }
 
-  svg polygon {
-    stroke-dasharray: 17;
-    animation: dash 2.5s cubic-bezier(0.35, 0.04, 0.63, 0.95) infinite;
-  }
-
-
-  @keyframes dash {
-    to {
-      stroke-dashoffset: 136;
-    }
-  }
-
-  @keyframes rotate {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.5);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
 
 }

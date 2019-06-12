@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AgmInfoWindow, AgmMap, AgmMarker} from '@agm/core';
 import * as fromState from './../../../store/users';
-import {Select, Store} from '@ngxs/store';
+import {Actions, ofActionSuccessful, Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {UserModel} from '../../../model/user.model';
 import {untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   lat = 51.678418;
   lng = 7.809007;
 
-  constructor(private store: Store, public authSrv: AuthService, public userSrv: UserService,
+  constructor(private store: Store, public authSrv: AuthService, private actions$: Actions, public userSrv: UserService,
               private markerDlgSrv: MarkerEditDialogService, public mapSrv: MapService) {
 
     this.selectedUserId = this.authSrv.getUserId();
@@ -49,6 +49,12 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.actions$.pipe(
+      untilComponentDestroyed(this),
+      ofActionSuccessful(fromState.USER_UPDATE_LOCATION_SUCCESS)).subscribe((location: LocationModel) => {
+      this.mapSrv.centerMapAroundMarker(this.map, location.latitude, location.longitude);
+    });
+
     this.userSrv.getSelectedUser().pipe(untilComponentDestroyed(this)).subscribe((userId) => {
       this.selectedUserId = userId;
       this.store.dispatch(new fromState.UsersDetails(userId));
