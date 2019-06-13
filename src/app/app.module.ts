@@ -7,12 +7,12 @@ import {environment} from '../environments/environment';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {UsersState} from './store/users/state/users.state';
+import {UsersState} from './store/users/state';
 import {TokenInterceptor} from './core/Interceptor/token.interceptor';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

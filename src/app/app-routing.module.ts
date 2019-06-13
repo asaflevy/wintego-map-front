@@ -11,6 +11,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {path: 'login', loadChildren: './login/login.module#LoginModule'},
+  {path: 'register', loadChildren: './register/register.module#RegisterModule'},
   {path: 'dashbaord', loadChildren: 'src/app/layout/dashboard/dashboard.module#DashboardModule'},
 ];
 

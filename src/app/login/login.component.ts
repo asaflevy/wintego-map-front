@@ -9,7 +9,8 @@ import {FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup = new FormGroup({
+
+  loginForm: FormGroup = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
   });
@@ -20,9 +21,11 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  get f() { return this.loginForm.controls; }
+
   submit() {
-    if (this.form.valid) {
-      const userData = this.form.value;
+    if (this.loginForm.valid) {
+      const userData = this.loginForm.value;
       this.authSrv.login({email: userData.email, password: userData.password}).subscribe((resData) => {
         this.router.navigate(['/dashboard']);
       });

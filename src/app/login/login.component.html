@@ -3,7 +3,7 @@
     <mat-card>
       <mat-card-title>Login</mat-card-title>
       <mat-card-content>
-        <form (ngSubmit)="submit()" [formGroup]="form">
+        <form (ngSubmit)="submit()" [formGroup]="loginForm">
           <p>
             <mat-form-field>
               <input formControlName="email" matInput placeholder="email" type="text">
@@ -16,12 +16,10 @@
             </mat-form-field>
           </p>
 
-          <p *ngIf="error" class="error">
-            {{ error }}
-          </p>
 
           <div class="button">
-            <button mat-button type="submit">Login</button>
+            <button mat-raised-button class="register-btn" color="primary" (click)="$event.stopPropagation()" [routerLink]="['/register']" >Register</button>
+            <button mat-raised-button type="submit">Login</button>
           </div>
 
         </form>

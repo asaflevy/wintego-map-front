@@ -7,6 +7,7 @@ import {catchError} from 'rxjs/operators';
 import {AuthService} from '../auth/auth.srv';
 import {LocationModel} from '../../model/location.model';
 import {UserTypeModel} from '../../model/auth.model';
+import {UserRegisterModel} from '../../model/user-register.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ import {UserTypeModel} from '../../model/auth.model';
 export class UserService {
 
   private apiUrl = environment.baseApiUrl;
+  private usersUrl = `${environment.baseApiUrl}/users`;
 
   private selectedUser = new Subject<any>();
 
@@ -25,6 +27,13 @@ export class UserService {
     return this.http
       .get<UserModel>(`${this.apiUrl}/users/getUserData/${userId}`)
       .pipe(catchError((error: any) => observableThrowError(error.json())));
+  }
+
+  registerUser(userData: UserRegisterModel): Observable<any> {
+    return this.http
+      .post<any>(`${this.usersUrl}/register`, {...userData})
+      .pipe(catchError((error: any) => observableThrowError(error.json())));
+
   }
 
   updateUserLocation(userId: string, location: LocationModel): Observable<UserModel> {
@@ -52,4 +61,6 @@ export class UserService {
   isAdminUser(): boolean {
     return this.authSrv.getUserType() === UserTypeModel.Admin;
   }
+
+
 }

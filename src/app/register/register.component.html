@@ -1,0 +1,46 @@
+<div class="register-container">
+  <div class="content">
+    <mat-card>
+      <mat-card-title>Registration</mat-card-title>
+      <mat-card-content>
+        <form (ngSubmit)="onSubmit()" [formGroup]="regForm">
+          <mat-form-field class="full-width">
+            <input  formControlName="firstName" matInput placeholder="First Name" required>
+            <mat-error
+              *ngIf="!regForm.controls['firstName'].valid && regForm.controls['firstName'].touched">
+              first name is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input  formControlName="lastName" matInput placeholder="Last Name" required>
+            <mat-error
+              *ngIf="!regForm.controls['lastName'].valid && regForm.controls['lastName'].touched">
+              last name email is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <input  formControlName="email" matInput placeholder="Email" required>
+            <mat-error
+              *ngIf="!regForm.controls['email'].valid && regForm.controls['email'].touched">
+              email is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <input type="password"  formControlName="password" matInput placeholder="Password" required>
+            <mat-error
+              *ngIf="!regForm.controls['password'].valid && regForm.controls['password'].touched">
+              password  is required
+            </mat-error>
+          </mat-form-field>
+
+          <button [disabled]="!regForm.valid" class="submit-btn" color="primary" mat-raised-button
+                  type="submit">
+            Register
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
