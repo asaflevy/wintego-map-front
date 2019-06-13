@@ -63,7 +63,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"default~dashboard-dashboard-module~layout-layout-module":"default~dashboard-dashboard-module~layout-layout-module","dashboard-dashboard-module":"dashboard-dashboard-module","layout-layout-module":"layout-layout-module","loggerInterseptor-loggerInterseptor-module":"loggerInterseptor-loggerInterseptor-module","login-login-module":"login-login-module"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"default~dashboard-dashboard-module~layout-layout-module":"default~dashboard-dashboard-module~layout-layout-module","dashboard-dashboard-module":"dashboard-dashboard-module","layout-layout-module":"layout-layout-module","default~login-login-module~register-register-module":"default~login-login-module~register-register-module","login-login-module":"login-login-module","register-register-module":"register-register-module","loggerInterseptor-loggerInterseptor-module":"loggerInterseptor-loggerInterseptor-module"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function

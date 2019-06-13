@@ -348,25 +348,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/***/ }),
-
-/***/ "./src/app/store/users/state/index.ts":
-/*!********************************************!*\
-  !*** ./src/app/store/users/state/index.ts ***!
-  \********************************************/
-/*! exports provided: UsersListStateModel, UsersState */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _users_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users.state */ "./src/app/store/users/state/users.state.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UsersListStateModel", function() { return _users_state__WEBPACK_IMPORTED_MODULE_0__["UsersListStateModel"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UsersState", function() { return _users_state__WEBPACK_IMPORTED_MODULE_0__["UsersState"]; });
-
-
-
-
 /***/ })
 
 }]);

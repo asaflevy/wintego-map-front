@@ -24,7 +24,13 @@ var map = {
 	],
 	"./login/login.module": [
 		"./src/app/login/login.module.ts",
+		"default~login-login-module~register-register-module",
 		"login-login-module"
+	],
+	"./register/register.module": [
+		"./src/app/register/register.module.ts",
+		"default~login-login-module~register-register-module",
+		"register-register-module"
 	],
 	"src/app/layout/dashboard/dashboard.module": [
 		"./src/app/layout/dashboard/dashboard.module.ts",
@@ -83,6 +89,7 @@ var routes = [
         canActivate: [_core_auth_auth_guard_srv__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
     },
     { path: 'login', loadChildren: './login/login.module#LoginModule' },
+    { path: 'register', loadChildren: './register/register.module#RegisterModule' },
     { path: 'dashbaord', loadChildren: 'src/app/layout/dashboard/dashboard.module#DashboardModule' },
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -176,7 +183,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngxs_devtools_plugin__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ngxs/devtools-plugin */ "./node_modules/@ngxs/devtools-plugin/fesm5/ngxs-devtools-plugin.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var _store_users_state_users_state__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store/users/state/users.state */ "./src/app/store/users/state/users.state.ts");
+/* harmony import */ var _store_users_state__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store/users/state */ "./src/app/store/users/state/index.ts");
 /* harmony import */ var _core_Interceptor_token_interceptor__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./core/Interceptor/token.interceptor */ "./src/app/core/Interceptor/token.interceptor.ts");
 
 
@@ -196,14 +203,14 @@ var AppModule = /** @class */ (function () {
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__["BrowserAnimationsModule"],
-                _ngxs_store__WEBPACK_IMPORTED_MODULE_3__["NgxsModule"].forRoot([_store_users_state_users_state__WEBPACK_IMPORTED_MODULE_10__["UsersState"]]),
+                _ngxs_store__WEBPACK_IMPORTED_MODULE_3__["NgxsModule"].forRoot([_store_users_state__WEBPACK_IMPORTED_MODULE_10__["UsersState"]]),
                 _ngxs_devtools_plugin__WEBPACK_IMPORTED_MODULE_7__["NgxsReduxDevtoolsPluginModule"].forRoot({
                     name: 'NGXS Wintego Store',
                     disabled: _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].production
@@ -479,12 +486,18 @@ var UserService = /** @class */ (function () {
         this.http = http;
         this.authSrv = authSrv;
         this.apiUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].baseApiUrl;
+        this.usersUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].baseApiUrl + "/users";
         this.selectedUser = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
     UserService.prototype.getUsers = function (selectedUserId) {
         var userId = selectedUserId || this.authSrv.getUserId();
         return this.http
             .get(this.apiUrl + "/users/getUserData/" + userId)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(error.json()); }));
+    };
+    UserService.prototype.registerUser = function (userData) {
+        return this.http
+            .post(this.usersUrl + "/register", tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, userData))
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(error.json()); }));
     };
     UserService.prototype.updateUserLocation = function (userId, location) {
@@ -891,6 +904,25 @@ var GetAllUsersFail = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/store/users/state/index.ts":
+/*!********************************************!*\
+  !*** ./src/app/store/users/state/index.ts ***!
+  \********************************************/
+/*! exports provided: UsersListStateModel, UsersState */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _users_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users.state */ "./src/app/store/users/state/users.state.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UsersListStateModel", function() { return _users_state__WEBPACK_IMPORTED_MODULE_0__["UsersListStateModel"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UsersState", function() { return _users_state__WEBPACK_IMPORTED_MODULE_0__["UsersState"]; });
+
+
+
+
+/***/ }),
+
 /***/ "./src/app/store/users/state/users.state.ts":
 /*!**************************************************!*\
   !*** ./src/app/store/users/state/users.state.ts ***!
@@ -1126,10 +1158,15 @@ var UsersState = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 var environment = {
-    production: true,
-    baseUrl: 'https://wintego-map-backend.herokuapp.com',
-    baseApiUrl: 'https://wintego-map-backend.herokuapp.com/api'
+    production: false,
+    baseUrl: 'http://localhost:3000',
+    baseApiUrl: 'http://localhost:3000/api'
 };
+// export const environment = {
+//   production: true,
+//   baseUrl: 'https://wintego-map-backend.herokuapp.com',
+//   baseApiUrl: 'https://wintego-map-backend.herokuapp.com/api'
+// };
 
 
 /***/ }),
