@@ -4,8 +4,8 @@
 @import '_responsive';
 @import '_variables';
 
-.gmap-info-window-container{
-  color: @secondary-primary-color ;
+.gmap-info-window-container {
+  color: @secondary-primary-color;
   margin: 10px;
   font-size: 14px;
   font-weight: @font-bold;
@@ -13,13 +13,33 @@
 
 .mat-snack-bar-container {
   color: @primary-color;
-  font-size:  1.1rem;
+  font-size: 1.1rem;
   background: @color-dark-grey;
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 }
 
 .mat-body, .mat-body-1, .mat-typography {
   font: 400 1.4rem/2.2rem Raleway, Roboto, sans-serif;
+}
+
+.mat-form-field-infix input {
+  color: @COLOR_BLACK;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  color: @COLOR_BLACK !important;
+  border: 1px solid #fff;
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .art-dialog-close {
@@ -115,13 +135,16 @@ a.a2 {
     color: @color-white;
   }
 }
-a.a3{
+
+a.a3 {
   color: @color-white;
   font-weight: 500;
+
   &:hover {
     color: @primary-color;
   }
 }
+
 i.art-icon:hover, i.art-icon.active {
   color: @secondary-primary-color;
 }
@@ -155,11 +178,9 @@ button {
 }
 
 
-
 .mat-select-trigger {
   font-size: 12px;
 }
-
 
 
 .mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
@@ -169,7 +190,6 @@ button {
 .mat-form-field-infix {
   max-width: none !important;
 }
-
 
 
 .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading, .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch, .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
@@ -243,6 +263,7 @@ a:hover {
   .mat-form-field-outline-thick {
     color: @secondary-primary-color;
   }
+
   .mat-form-field-label {
     color: @secondary-primary-color;
   }
@@ -257,20 +278,18 @@ a:hover {
 }
 
 
-
 .mat-autocomplete-panel {
   overflow-y: hidden;
 }
 
 
-
-.dialog-close{
-  position: absolute  !important;
+.dialog-close {
+  position: absolute !important;
   top: 10px;
   right: 10px;
   font-size: 39px;
   font-weight: 300;
-  color:@color-white;
+  color: @color-white;
 }
 
 
@@ -281,7 +300,6 @@ mat-grid-list {
     }
   }
 }
-
 
 
 .mat-drawer-backdrop.mat-drawer-shown {
