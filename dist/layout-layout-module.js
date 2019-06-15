@@ -93,15 +93,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _core_auth_auth_srv__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../core/auth/auth.srv */ "./src/app/core/auth/auth.srv.ts");
+/* harmony import */ var _store_users__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../store/users */ "./src/app/store/users/index.ts");
+/* harmony import */ var _ngxs_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ngxs/store */ "./node_modules/@ngxs/store/fesm5/ngxs-store.js");
+
+
 
 
 
 
 var TopnavComponent = /** @class */ (function () {
-    function TopnavComponent(router, authSrv) {
+    function TopnavComponent(router, authSrv, store) {
         var _this = this;
         this.router = router;
         this.authSrv = authSrv;
+        this.store = store;
         this.router.events.subscribe(function (val) {
             if (val instanceof _angular_router__WEBPACK_IMPORTED_MODULE_2__["NavigationEnd"] && window.innerWidth <= 992) {
                 _this.toggleSidebar();
@@ -116,6 +121,7 @@ var TopnavComponent = /** @class */ (function () {
         dom.classList.toggle(this.pushRightClass);
     };
     TopnavComponent.prototype.onLoggedout = function () {
+        this.store.dispatch(new _store_users__WEBPACK_IMPORTED_MODULE_4__["ClearUserData"]());
         this.authSrv.logout();
         this.router.navigate(['/login']);
     };
@@ -125,7 +131,7 @@ var TopnavComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./topnav.component.html */ "./src/app/layout/components/topnav/topnav.component.html"),
             styles: [__webpack_require__(/*! ./topnav.component.less */ "./src/app/layout/components/topnav/topnav.component.less")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _core_auth_auth_srv__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _core_auth_auth_srv__WEBPACK_IMPORTED_MODULE_3__["AuthService"], _ngxs_store__WEBPACK_IMPORTED_MODULE_5__["Store"]])
     ], TopnavComponent);
     return TopnavComponent;
 }());

@@ -11,7 +11,7 @@ export class LoggerDetailsComponent implements OnInit, AfterContentInit {
 
   @Input() loggerDetail: LoggerModel[];
   @Output() onMarkerSelected = new EventEmitter();
-  displayedColumns: string[] = ['created_date', 'ip', 'city', 'region_code', 'longitude', 'latitude', 'message'];
+  displayedColumns: string[] = ['created_date', 'ip', 'city', 'region_code', 'longitude', 'latitude', 'message', 'userAgent'];
   dataSource: MatTableDataSource<LoggerModel> = null;
 
   constructor() {

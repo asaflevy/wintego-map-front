@@ -45,6 +45,18 @@ export class UsersState {
   }
 
 
+  @Action(fromAction.ClearUserData)
+  ClearUserData({patchState}: StateContext<UsersListStateModel>) {
+    patchState(
+      {
+        data: null,
+        allUsers: [],
+        loaded: false,
+        loading: false,
+      });
+  }
+
+
   @Action(fromAction.UsersDetails)
   UsersListDetails({dispatch, patchState}: StateContext<UsersListStateModel>, action: fromAction.UsersDetails) {
     patchState({loading: true});
@@ -161,6 +173,47 @@ export class UsersState {
 
   @Action(fromAction.GetAllUsersFail)
   GetAllUsersFail({patchState}: StateContext<UsersListStateModel>) {
+    this.messageSrv.showMessage('get all users data failed');
+    patchState(
+      {
+        loading: false,
+        loaded: false,
+      }
+    );
+  }
+
+
+  @Action(fromAction.DeleteUserLocation)
+  DeleteUserLocation({dispatch, patchState}: StateContext<UsersListStateModel>, action: fromAction.DeleteUserLocation) {
+    patchState({loading: true});
+
+    return this.userSrv.deleteUserLocation(action.payload)
+      .pipe(
+        map((data) => {
+          dispatch(new fromAction.DeleteUserLocationSuccess(data));
+        }),
+        catchError(error => of(dispatch(new fromAction.DeleteUserLocationFail(error))))
+      );
+  }
+
+  @Action(fromAction.DeleteUserLocationSuccess)
+  DeleteUserLocationSuccess({patchState, getState}: StateContext<UsersListStateModel>, action: fromAction.DeleteUserLocationSuccess) {
+    const data = getState().data;
+    const location = action.payload;
+    data.fkLocation = data.fkLocation.filter(ob =>
+      ob._id !== location._id
+    );
+    patchState(
+      {
+        ...data,
+        loading: false,
+        loaded: true
+      }
+    );
+  }
+
+  @Action(fromAction.DeleteUserLocationFail)
+  DeleteUserLocationFail({patchState}: StateContext<UsersListStateModel>) {
     this.messageSrv.showMessage('get all users data failed');
     patchState(
       {

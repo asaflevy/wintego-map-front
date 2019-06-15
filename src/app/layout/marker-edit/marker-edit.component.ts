@@ -2,7 +2,7 @@ import {AfterContentInit, Component, ElementRef, Inject, NgZone, OnDestroy, OnIn
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {LocationModel} from '../../model/location.model';
-import {AgmInfoWindow, MapsAPILoader} from '@agm/core';
+import {MapsAPILoader} from '@agm/core';
 import {Actions, ofActionSuccessful, Store} from '@ngxs/store';
 import * as fromUsers from '../../store/users';
 import {MapService} from '../service/map.service';
@@ -43,6 +43,10 @@ export class MarkerEditComponent implements OnInit, AfterContentInit, OnDestroy 
 
   ngOnInit() {
     this.actions$.pipe(ofActionSuccessful(fromUsers.UserInsertOrUpdateLocationSuccess), untilComponentDestroyed(this)).subscribe(() => {
+      this.dialogRef.close();
+    });
+
+    this.actions$.pipe(ofActionSuccessful(fromUsers.DeleteUserLocationSuccess), untilComponentDestroyed(this)).subscribe(() => {
       this.dialogRef.close();
     });
   }
@@ -92,6 +96,10 @@ export class MarkerEditComponent implements OnInit, AfterContentInit, OnDestroy 
     this.longitude = $event.coords.lng;
     this.markerData.latitude = this.latitude;
     this.markerData.longitude = this.longitude;
+  }
+
+  onDeleteMarker() {
+    this.store.dispatch(new fromUsers.DeleteUserLocation({userId: this.userId, locationId: this.markerData._id}));
   }
 
 

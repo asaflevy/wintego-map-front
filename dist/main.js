@@ -511,6 +511,15 @@ var UserService = /** @class */ (function () {
             .get(this.apiUrl + "/users/getAllUsers")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(error.json()); }));
     };
+    UserService.prototype.deleteUserLocation = function (params) {
+        var httpParams = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpParams"]()
+            .set('locationId', params.locationId)
+            .set('userId', params.userId);
+        var options = { params: httpParams };
+        return this.http
+            .delete(this.apiUrl + "/users/deleteLocation", options)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(error.json()); }));
+    };
     UserService.prototype.setSelectedUser = function (userId) {
         this.selectedUser.next(userId);
     };
@@ -744,12 +753,14 @@ var SharedModule = /** @class */ (function () {
 /*!**********************************************!*\
   !*** ./src/app/store/users/actions/index.ts ***!
   \**********************************************/
-/*! exports provided: USER_DETAILS, USER_DETAILS_SUCCESS, USER_DETAILS_FAIL, USER_UPDATE_LOCATION, USER_UPDATE_LOCATION_SUCCESS, USER_UPDATE_LOCATION_FAIL, GET_ALL_USER, GET_ALL_USER_SUCCESS, GET_ALL_USER_FAIL, UsersDetails, UsersDetailsSuccess, UsersDetailsFail, UserInsertOrUpdateLocation, UserInsertOrUpdateLocationSuccess, UserUpdateLocationFail, GetAllUsers, GetAllUsersSuccess, GetAllUsersFail */
+/*! exports provided: CLEAR_USER_DATA, USER_DETAILS, USER_DETAILS_SUCCESS, USER_DETAILS_FAIL, USER_UPDATE_LOCATION, USER_UPDATE_LOCATION_SUCCESS, USER_UPDATE_LOCATION_FAIL, GET_ALL_USER, GET_ALL_USER_SUCCESS, GET_ALL_USER_FAIL, DELETE_USER_LOCATION, DELETE_USER_LOCATION_SUCCESS, DELETE_USER_LOCATION_FAIL, ClearUserData, UsersDetails, UsersDetailsSuccess, UsersDetailsFail, UserInsertOrUpdateLocation, UserInsertOrUpdateLocationSuccess, UserUpdateLocationFail, GetAllUsers, GetAllUsersSuccess, GetAllUsersFail, DeleteUserLocation, DeleteUserLocationSuccess, DeleteUserLocationFail */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _users_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users.action */ "./src/app/store/users/actions/users.action.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CLEAR_USER_DATA", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["CLEAR_USER_DATA"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "USER_DETAILS", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["USER_DETAILS"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "USER_DETAILS_SUCCESS", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["USER_DETAILS_SUCCESS"]; });
@@ -767,6 +778,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_USER_SUCCESS", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["GET_ALL_USER_SUCCESS"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_USER_FAIL", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["GET_ALL_USER_FAIL"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DELETE_USER_LOCATION", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["DELETE_USER_LOCATION"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DELETE_USER_LOCATION_SUCCESS", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["DELETE_USER_LOCATION_SUCCESS"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DELETE_USER_LOCATION_FAIL", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["DELETE_USER_LOCATION_FAIL"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ClearUserData", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["ClearUserData"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UsersDetails", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["UsersDetails"]; });
 
@@ -786,6 +805,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "GetAllUsersFail", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["GetAllUsersFail"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DeleteUserLocation", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["DeleteUserLocation"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DeleteUserLocationSuccess", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["DeleteUserLocationSuccess"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DeleteUserLocationFail", function() { return _users_action__WEBPACK_IMPORTED_MODULE_0__["DeleteUserLocationFail"]; });
+
 
 
 
@@ -795,11 +820,12 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************!*\
   !*** ./src/app/store/users/actions/users.action.ts ***!
   \*****************************************************/
-/*! exports provided: USER_DETAILS, USER_DETAILS_SUCCESS, USER_DETAILS_FAIL, USER_UPDATE_LOCATION, USER_UPDATE_LOCATION_SUCCESS, USER_UPDATE_LOCATION_FAIL, GET_ALL_USER, GET_ALL_USER_SUCCESS, GET_ALL_USER_FAIL, UsersDetails, UsersDetailsSuccess, UsersDetailsFail, UserInsertOrUpdateLocation, UserInsertOrUpdateLocationSuccess, UserUpdateLocationFail, GetAllUsers, GetAllUsersSuccess, GetAllUsersFail */
+/*! exports provided: CLEAR_USER_DATA, USER_DETAILS, USER_DETAILS_SUCCESS, USER_DETAILS_FAIL, USER_UPDATE_LOCATION, USER_UPDATE_LOCATION_SUCCESS, USER_UPDATE_LOCATION_FAIL, GET_ALL_USER, GET_ALL_USER_SUCCESS, GET_ALL_USER_FAIL, DELETE_USER_LOCATION, DELETE_USER_LOCATION_SUCCESS, DELETE_USER_LOCATION_FAIL, ClearUserData, UsersDetails, UsersDetailsSuccess, UsersDetailsFail, UserInsertOrUpdateLocation, UserInsertOrUpdateLocationSuccess, UserUpdateLocationFail, GetAllUsers, GetAllUsersSuccess, GetAllUsersFail, DeleteUserLocation, DeleteUserLocationSuccess, DeleteUserLocationFail */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_USER_DATA", function() { return CLEAR_USER_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_DETAILS", function() { return USER_DETAILS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_DETAILS_SUCCESS", function() { return USER_DETAILS_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_DETAILS_FAIL", function() { return USER_DETAILS_FAIL; });
@@ -809,6 +835,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_USER", function() { return GET_ALL_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_USER_SUCCESS", function() { return GET_ALL_USER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_ALL_USER_FAIL", function() { return GET_ALL_USER_FAIL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_USER_LOCATION", function() { return DELETE_USER_LOCATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_USER_LOCATION_SUCCESS", function() { return DELETE_USER_LOCATION_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_USER_LOCATION_FAIL", function() { return DELETE_USER_LOCATION_FAIL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClearUserData", function() { return ClearUserData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UsersDetails", function() { return UsersDetails; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UsersDetailsSuccess", function() { return UsersDetailsSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UsersDetailsFail", function() { return UsersDetailsFail; });
@@ -818,6 +848,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetAllUsers", function() { return GetAllUsers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetAllUsersSuccess", function() { return GetAllUsersSuccess; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GetAllUsersFail", function() { return GetAllUsersFail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeleteUserLocation", function() { return DeleteUserLocation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeleteUserLocationSuccess", function() { return DeleteUserLocationSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeleteUserLocationFail", function() { return DeleteUserLocationFail; });
+var CLEAR_USER_DATA = '[USER] CLEAR_USER_DATA';
 var USER_DETAILS = '[USER] USER_DETAILS';
 var USER_DETAILS_SUCCESS = '[USER] USER_DETAILS_SUCCESS';
 var USER_DETAILS_FAIL = '[USER] USER_DETAILS_FAIL';
@@ -827,6 +861,16 @@ var USER_UPDATE_LOCATION_FAIL = '[USER] USER_UPDATE_LOCATION_FAIL';
 var GET_ALL_USER = '[USER] GET_ALL_USER';
 var GET_ALL_USER_SUCCESS = '[USER] GET_ALL_USER_SUCCESS';
 var GET_ALL_USER_FAIL = '[USER] GET_ALL_USER_FAIL';
+var DELETE_USER_LOCATION = '[USER] DELETE_USER_LOCATION';
+var DELETE_USER_LOCATION_SUCCESS = '[USER] DELETE_USER_LOCATION_SUCCESS';
+var DELETE_USER_LOCATION_FAIL = '[USER] DELETE_USER_LOCATION_FAIL';
+var ClearUserData = /** @class */ (function () {
+    function ClearUserData() {
+    }
+    ClearUserData.type = CLEAR_USER_DATA;
+    return ClearUserData;
+}());
+
 var UsersDetails = /** @class */ (function () {
     function UsersDetails(payload) {
         if (payload === void 0) { payload = null; }
@@ -900,6 +944,30 @@ var GetAllUsersFail = /** @class */ (function () {
     return GetAllUsersFail;
 }());
 
+var DeleteUserLocation = /** @class */ (function () {
+    function DeleteUserLocation(payload) {
+        this.payload = payload;
+    }
+    DeleteUserLocation.type = DELETE_USER_LOCATION;
+    return DeleteUserLocation;
+}());
+
+var DeleteUserLocationSuccess = /** @class */ (function () {
+    function DeleteUserLocationSuccess(payload) {
+        this.payload = payload;
+    }
+    DeleteUserLocationSuccess.type = DELETE_USER_LOCATION_SUCCESS;
+    return DeleteUserLocationSuccess;
+}());
+
+var DeleteUserLocationFail = /** @class */ (function () {
+    function DeleteUserLocationFail(payload) {
+        this.payload = payload;
+    }
+    DeleteUserLocationFail.type = DELETE_USER_LOCATION_FAIL;
+    return DeleteUserLocationFail;
+}());
+
 
 
 /***/ }),
@@ -969,6 +1037,15 @@ var UsersState = /** @class */ (function () {
     };
     UsersState.isLoading = function (state) {
         return state.loading;
+    };
+    UsersState.prototype.ClearUserData = function (_a) {
+        var patchState = _a.patchState;
+        patchState({
+            data: null,
+            allUsers: [],
+            loaded: false,
+            loading: false,
+        });
     };
     UsersState.prototype.UsersListDetails = function (_a, action) {
         var dispatch = _a.dispatch, patchState = _a.patchState;
@@ -1056,6 +1133,37 @@ var UsersState = /** @class */ (function () {
             loaded: false,
         });
     };
+    UsersState.prototype.DeleteUserLocation = function (_a, action) {
+        var dispatch = _a.dispatch, patchState = _a.patchState;
+        patchState({ loading: true });
+        return this.userSrv.deleteUserLocation(action.payload)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            dispatch(new _actions__WEBPACK_IMPORTED_MODULE_2__["DeleteUserLocationSuccess"](data));
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(dispatch(new _actions__WEBPACK_IMPORTED_MODULE_2__["DeleteUserLocationFail"](error))); }));
+    };
+    UsersState.prototype.DeleteUserLocationSuccess = function (_a, action) {
+        var patchState = _a.patchState, getState = _a.getState;
+        var data = getState().data;
+        var location = action.payload;
+        data.fkLocation = data.fkLocation.filter(function (ob) {
+            return ob._id !== location._id;
+        });
+        patchState(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, data, { loading: false, loaded: true }));
+    };
+    UsersState.prototype.DeleteUserLocationFail = function (_a) {
+        var patchState = _a.patchState;
+        this.messageSrv.showMessage('get all users data failed');
+        patchState({
+            loading: false,
+            loaded: false,
+        });
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_actions__WEBPACK_IMPORTED_MODULE_2__["ClearUserData"]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [Object]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+    ], UsersState.prototype, "ClearUserData", null);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_actions__WEBPACK_IMPORTED_MODULE_2__["UsersDetails"]),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
@@ -1111,6 +1219,24 @@ var UsersState = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
     ], UsersState.prototype, "GetAllUsersFail", null);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_actions__WEBPACK_IMPORTED_MODULE_2__["DeleteUserLocation"]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [Object, _actions__WEBPACK_IMPORTED_MODULE_2__["DeleteUserLocation"]]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+    ], UsersState.prototype, "DeleteUserLocation", null);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_actions__WEBPACK_IMPORTED_MODULE_2__["DeleteUserLocationSuccess"]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [Object, _actions__WEBPACK_IMPORTED_MODULE_2__["DeleteUserLocationSuccess"]]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+    ], UsersState.prototype, "DeleteUserLocationSuccess", null);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Action"])(_actions__WEBPACK_IMPORTED_MODULE_2__["DeleteUserLocationFail"]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [Object]),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+    ], UsersState.prototype, "DeleteUserLocationFail", null);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_ngxs_store__WEBPACK_IMPORTED_MODULE_1__["Selector"])(),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [UsersListStateModel]),
@@ -1162,7 +1288,6 @@ __webpack_require__.r(__webpack_exports__);
 //   baseUrl: 'http://localhost:3000',
 //   baseApiUrl: 'http://localhost:3000/api'
 // };
-//
 var environment = {
     production: true,
     baseUrl: 'https://wintego-map-backend.herokuapp.com',

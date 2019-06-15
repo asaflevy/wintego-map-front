@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, Subject, throwError as observableThrowError} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {UserModel} from '../../model/user.model';
@@ -47,6 +47,17 @@ export class UserService {
   getAllUsers(): Observable<UserModel[]> {
     return this.http
       .get<UserModel[]>(`${this.apiUrl}/users/getAllUsers`)
+      .pipe(catchError((error: any) => observableThrowError(error.json())));
+  }
+
+  deleteUserLocation(params: { userId: string, locationId: string }): Observable<LocationModel> {
+    const httpParams = new HttpParams()
+      .set('locationId', params.locationId)
+      .set('userId', params.userId);
+
+    const options = {params: httpParams};
+    return this.http
+      .delete<LocationModel>(`${this.apiUrl}/users/deleteLocation`, options)
       .pipe(catchError((error: any) => observableThrowError(error.json())));
   }
 

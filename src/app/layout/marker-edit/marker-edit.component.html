@@ -64,6 +64,9 @@
 
           <mat-card>
             <div class="form-group">
+              <button class="marker-delete" [disabled]="!markerData._id"  (click)="onDeleteMarker()" color="warn" mat-raised-button>
+                Delete
+              </button>
               <mat-form-field class="form-search-address-container">
                 <input c #search matInput (keydown.enter)="$event.preventDefault()" autocapitalize="off"
                        autocorrect="off" placeholder="Search Location" spellcheck="off"

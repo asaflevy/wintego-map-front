@@ -7,17 +7,17 @@
   <table [dataSource]="(dataSource)" class="mat-elevation-z8" mat-table>
 
 
-    <ng-container matColumnDef="created_date">
+    <ng-container class="logger-cell"  matColumnDef="created_date">
       <th *matHeaderCellDef mat-header-cell mat-sort-header> Date</th>
       <td *matCellDef="let element" mat-cell> {{element.created_date  | date :'short'}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="ip">
+    <ng-container  class="logger-cell" matColumnDef="ip">
       <th *matHeaderCellDef mat-header-cell> IP</th>
       <td *matCellDef="let element" mat-cell> {{element.ip}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="city">
+    <ng-container class="logger-cell" matColumnDef="city">
       <th *matHeaderCellDef mat-header-cell> City</th>
       <td *matCellDef="let element" mat-cell> {{element.fkLocation?.city }} </td>
     </ng-container>
@@ -40,6 +40,11 @@
     <ng-container matColumnDef="message" stickyEnd>
       <th *matHeaderCellDef mat-header-cell> Interceptor</th>
       <td *matCellDef="let element" mat-cell> {{element.message}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="userAgent" stickyEnd>
+      <th *matHeaderCellDef mat-header-cell> User-Agent</th>
+      <td *matCellDef="let element" mat-cell> {{element.userAgent}} </td>
     </ng-container>
 
     <tr *matHeaderRowDef="displayedColumns sticky: true" mat-header-row></tr>
