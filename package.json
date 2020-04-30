@@ -35,7 +35,7 @@
     "@w11k/ngx-componentdestroyed": "^4.1.4",
     "core-js": "^2.5.4",
     "include-media": "^1.4.9",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.11",
     "ngx-openlayers": "^0.8.22",
     "ngx-popper": "^6.0.7",
